@@ -5,6 +5,7 @@
 ## 2026-05-22
 
 - Docker と CI が `requirements.lock` を使うようにし、MkDocs 周辺の推移的依存を固定した。
+- `requirements.lock` の再生成を Dockerfile と同じ Python 3.14 slim image で実行できる `docker compose run --rm lock` に統一した。
 - `.dockerignore` を追加し、Docker build context から生成物、Git 管理情報、作業記録、一時ファイルを除外した。
 - `scripts/validate_docs.py` を追加し、MkDocs nav、全記事索引、ローカル Markdown リンクの同期漏れを CI で検出できるようにした。
 - README に公開サイト URL、strict build、依存 lock 更新、ドキュメント構造検証の手順を追加した。

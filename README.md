@@ -37,11 +37,10 @@ docker compose run --rm docs mkdocs build --clean --strict
 
 `requirements.txt` は人間が編集する直接依存の入力ファイルです。Docker と CI は、推移的依存まで固定した `requirements.lock` を使います。
 
-依存を更新したら、`pip-tools` で lock file を再生成します。
+依存を更新したら、Dockerfile と同じ Python 3.14 slim image で lock file を再生成します。
 
 ```powershell
-python -m pip install pip-tools
-pip-compile requirements.txt --output-file requirements.lock --resolver=backtracking
+docker compose run --rm lock
 ```
 
 ドキュメント構造の同期漏れは次で確認できます。
