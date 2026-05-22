@@ -19,12 +19,15 @@ jobs:
   build:
     name: Build site
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       - name: Build Docker image
-        run: docker build -t csharp-tutorial-lab-docs .
+        run: docker build --pull -t csharp-tutorial-lab-docs .
 
       - name: Build MkDocs site
         run: docker run --rm -v "${{ github.workspace }}:/work" csharp-tutorial-lab-docs mkdocs build --clean --strict
@@ -41,6 +44,7 @@ jobs:
     name: Deploy site
     needs: build
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

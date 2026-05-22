@@ -29,8 +29,16 @@ docker compose run --rm docs mkdocs build --clean
 docker compose down
 ```
 
-## GitHub Pages
+## セキュリティ対策
 
-GitHub Actions では [.github/workflows/deploy-pages.yml](.github/workflows/deploy-pages.yml) が Docker image を build し、`mkdocs build` の生成物を GitHub Pages へアップロードします。
+このリポジトリでは、ドキュメントサイトそのものだけでなく、依存関係、GitHub Actions、Dockerfile、秘密情報の混入を CI で継続的に確認します。
 
-GitHub 側では、リポジトリの `Settings` → `Pages` → `Build and deployment` を `GitHub Actions` に設定します。
+- [Dependabot](.github/dependabot.yml) で GitHub Actions、Python 依存、Docker、Docker Compose の更新を監視します。
+- [Security checks](.github/workflows/security.yml) で MkDocs の strict build、Dependency Review、GitHub Actions workflow の静的解析、secret scan、Dockerfile lint を実行します。
+- [CodeQL](.github/workflows/codeql.yml) で GitHub Actions workflow 定義を code scanning にかけます。
+- [OpenSSF Scorecard](.github/workflows/scorecard.yml) で supply chain security の状態を定期確認し、結果を code scanning にアップロードします。
+- [CODEOWNERS](.github/CODEOWNERS) で全ファイルの所有者を明示します。
+- [SECURITY.md](SECURITY.md) で脆弱性報告の扱いと CI セキュリティ対策を明記します。
+- 各 workflow では、可能な限り `GITHUB_TOKEN` の権限を最小化し、`actions/checkout` の credential 永続化を無効にします。
+
+GitHub 側では、`Settings` → `Code security and analysis` で secret scanning と push protection を有効化し、`Rulesets` または branch protection で主要な security check を必須にします。
