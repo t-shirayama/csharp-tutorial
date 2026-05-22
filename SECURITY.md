@@ -19,5 +19,6 @@ Do not disclose suspected secrets, tokens, or exploitable workflow details in pu
 - actionlint and zizmor inspect GitHub Actions workflow syntax and security patterns.
 - Hadolint checks the Dockerfile for container build best practices.
 - OpenSSF Scorecard reports repository supply-chain posture to GitHub code scanning.
+- Docker base image and Python dependencies are pinned and updated through Dependabot.
 - Workflows use least-privilege `GITHUB_TOKEN` permissions where possible.
 - Checkout steps disable credential persistence unless a job explicitly needs push access.
