@@ -37,7 +37,7 @@ docker compose down
 - Dependabot が作る PR は `develop` 宛にし、`main` へは `develop` からレビュー済み PR で反映します。
 - [Security checks](.github/workflows/security.yml) で MkDocs の strict build、Dependency Review、GitHub Actions workflow の静的解析、secret scan、Dockerfile lint を実行します。
 - [CodeQL](.github/workflows/codeql.yml) で GitHub Actions workflow 定義を code scanning にかけます。
-- [OpenSSF Scorecard](.github/workflows/scorecard.yml) で supply chain security の状態を定期確認し、結果を code scanning にアップロードします。
+- [OpenSSF Scorecard](.github/workflows/scorecard.yml) で `main` の supply chain security の状態を定期確認し、結果を code scanning にアップロードします。
 - [CODEOWNERS](.github/CODEOWNERS) で全ファイルの所有者を明示します。
 - [SECURITY.md](SECURITY.md) で脆弱性報告の扱いと CI セキュリティ対策を明記します。
 - Docker base image と Python 依存は固定し、Dependabot で更新 PR を作ります。

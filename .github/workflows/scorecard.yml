@@ -5,7 +5,6 @@ on:
   push:
     branches:
       - main
-      - develop
   schedule:
     - cron: "44 20 * * 1"
   workflow_dispatch:
