@@ -4,6 +4,7 @@
 
 ## 2026-05-22
 
+- サイドメニューの `学習カテゴリ` を廃止し、`基礎編`、`実務編`、`応用・発展編` の3区分へ再構成した。
 - Docker と CI が `requirements.lock` を使うようにし、MkDocs 周辺の推移的依存を固定した。
 - `requirements.lock` の再生成を Dockerfile と同じ Python 3.14 slim image で実行できる `docker compose run --rm lock` に統一した。
 - `.dockerignore` を追加し、Docker build context から生成物、Git 管理情報、作業記録、一時ファイルを除外した。
