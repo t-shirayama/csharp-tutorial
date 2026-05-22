@@ -4,7 +4,7 @@
 
 ## 2026-05-22
 
-- CI セキュリティ対策として Dependabot、CodeQL、Dependency Review、Gitleaks、actionlint、zizmor、Hadolint、OpenSSF Scorecard、CODEOWNERS、SECURITY.md を追加し、GitHub Actions の権限と checkout 設定を強化。README に対策内容を整理し、GitHub Pages の説明セクションを削除。
+- CI セキュリティ対策として Dependabot、CodeQL、Dependency Review、Gitleaks、actionlint、zizmor、Hadolint、OpenSSF Scorecard、CODEOWNERS、SECURITY.md を追加し、Docker base image と Python 依存の固定、GitHub Actions の権限と checkout 設定を強化。README に対策内容を整理し、GitHub Pages の説明セクションを削除。
 - `09_データアクセス` に EF Core パフォーマンス診断、Raw SQL と Dapper 併用、DB 製品差分、複数 DbContext と Read / Write 分離の記事を追加し、DB 性能・設計判断の実務サンプルを補強。
 - `11_ツールと運用` にデプロイ失敗時の診断記事を追加し、Secret 管理に GitHub Actions Secrets と Key Vault の運用例を補強。
 - `12_実践プロジェクト` の TODO Web API、DB 付き CRUD、認証付きメモ API を step-by-step 化し、endpoint、query、認証方式選択のサンプルを追加。
