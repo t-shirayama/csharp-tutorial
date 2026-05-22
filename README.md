@@ -39,6 +39,7 @@ docker compose down
 - [OpenSSF Scorecard](.github/workflows/scorecard.yml) で supply chain security の状態を定期確認し、結果を code scanning にアップロードします。
 - [CODEOWNERS](.github/CODEOWNERS) で全ファイルの所有者を明示します。
 - [SECURITY.md](SECURITY.md) で脆弱性報告の扱いと CI セキュリティ対策を明記します。
+- Docker base image と Python 依存は固定し、Dependabot で更新 PR を作ります。
 - 各 workflow では、可能な限り `GITHUB_TOKEN` の権限を最小化し、`actions/checkout` の credential 永続化を無効にします。
 
 GitHub 側では、`Settings` → `Code security and analysis` で secret scanning と push protection を有効化し、`Rulesets` または branch protection で主要な security check を必須にします。
