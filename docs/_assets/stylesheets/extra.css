@@ -1,10 +1,15 @@
 :root {
   --md-text-font-size: 0.78rem;
-  --site-footer-height: 1.75rem;
-  --site-footer-clearance: 2.75rem;
+  --site-footer-height: 1.45rem;
   --code-bg: #1f2430;
   --code-fg: #d7dce2;
   --code-border: #3a4252;
+  --site-header-bg: #607d8b;
+  --site-footer-bg: #546e7a;
+  --site-footer-bg-hover: #607d8b;
+  --site-active-color: #009688;
+  --site-active-color-dark: #00796b;
+  --site-heading-color: #37474f;
 }
 
 .md-main__inner {
@@ -12,16 +17,16 @@
 }
 
 .md-content__inner {
-  padding-bottom: calc(var(--site-footer-clearance) + 1rem);
+  padding-bottom: 1.5rem;
 }
 
 .md-sidebar__scrollwrap {
-  padding-bottom: calc(var(--site-footer-clearance) + 0.5rem);
+  padding-bottom: 1rem;
 }
 
 @media screen and (min-width: 76.25em) {
   .md-sidebar {
-    height: calc(100vh - 2.4rem - var(--site-footer-clearance));
+    height: calc(100vh - 2.4rem);
   }
 }
 
@@ -33,13 +38,38 @@
   border-left: 1px solid var(--md-default-fg-color--lightest);
 }
 
+.md-header {
+  background: var(--site-header-bg);
+}
+
+.md-nav__link--active,
+.md-nav__item--active > .md-nav__link {
+  padding-left: 0.55rem;
+  border-left: 3px solid var(--site-active-color);
+  border-radius: 0 0.25rem 0.25rem 0;
+  background: rgba(0, 150, 136, 0.12);
+  color: var(--site-active-color-dark) !important;
+  font-weight: 700;
+}
+
+.md-nav__link--active:hover,
+.md-nav__item--active > .md-nav__link:hover {
+  background: rgba(0, 150, 136, 0.16);
+}
+
 .md-typeset {
   line-height: 1.75;
 }
 
 .md-typeset h1 {
+  color: var(--site-heading-color);
   font-weight: 700;
   letter-spacing: 0;
+}
+
+.md-typeset h2,
+.md-typeset h3 {
+  color: var(--site-heading-color);
 }
 
 .md-typeset h2 {
@@ -164,31 +194,27 @@
 }
 
 .md-footer {
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  left: 0;
   z-index: 20;
-  background: #263238 !important;
-  box-shadow: 0 -0.15rem 0.5rem rgba(0, 0, 0, 0.14);
+  background: var(--site-footer-bg) !important;
+  box-shadow: 0 -0.05rem 0.2rem rgba(0, 0, 0, 0.08);
 }
 
 .md-footer__inner {
   min-height: var(--site-footer-height);
   max-width: 52rem;
   padding: 0 0.4rem;
-  background: #263238 !important;
+  background: var(--site-footer-bg) !important;
 }
 
 .md-footer__link {
   flex: 0 1 22rem;
-  padding: 0.05rem 0.4rem;
+  padding: 0.02rem 0.35rem;
   border-radius: 0.25rem;
-  background: #263238 !important;
+  background: var(--site-footer-bg) !important;
 }
 
 .md-footer__link:hover {
-  background: #37474f !important;
+  background: var(--site-footer-bg-hover) !important;
 }
 
 .md-footer__title {

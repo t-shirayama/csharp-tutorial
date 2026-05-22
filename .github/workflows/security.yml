@@ -36,6 +36,9 @@ jobs:
       - name: Build MkDocs site strictly
         run: docker run --rm -v "${{ github.workspace }}:/work" csharp-tutorial-lab-docs mkdocs build --clean --strict
 
+      - name: Validate documentation structure
+        run: docker run --rm -v "${{ github.workspace }}:/work" csharp-tutorial-lab-docs python scripts/validate_docs.py
+
   dependency-review:
     name: Dependency review
     if: github.event_name == 'pull_request'
@@ -51,7 +54,7 @@ jobs:
           persist-credentials: false
 
       - name: Review dependency changes
-        uses: actions/dependency-review-action@v4
+        uses: actions/dependency-review-action@v5
         with:
           fail-on-severity: moderate
           vulnerability-check: true
@@ -116,7 +119,7 @@ jobs:
           persist-credentials: false
 
       - name: Lint Dockerfile
-        uses: hadolint/hadolint-action@v3.1.0
+        uses: hadolint/hadolint-action@v3.3.0
         with:
           dockerfile: Dockerfile
           failure-threshold: warning

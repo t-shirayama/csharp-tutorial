@@ -4,6 +4,10 @@
 
 公開用の記事は [docs/index.md](docs/index.md) から始まります。レビュー、ファクトチェック、アーカイブなどの管理記録は `作業/` に残し、サイトのナビゲーションには含めません。
 
+## 公開サイト
+
+https://t-shirayama.github.io/csharp-tutorial-lab/
+
 ## ローカル表示
 
 ローカル環境を汚さないため、Python や MkDocs は Docker container 内で実行します。
@@ -21,7 +25,29 @@ docker compose up --build
 docker compose run --rm docs mkdocs build --clean
 ```
 
+CI と同じ厳格な条件で確認する場合は次を実行します。
+
+```powershell
+docker compose run --rm docs mkdocs build --clean --strict
+```
+
 生成物は `site/` に出力されます。
+
+## 依存関係
+
+`requirements.txt` は人間が編集する直接依存の入力ファイルです。Docker と CI は、推移的依存まで固定した `requirements.lock` を使います。
+
+依存を更新したら、Dockerfile と同じ Python 3.14 slim image で lock file を再生成します。
+
+```powershell
+docker compose run --rm lock
+```
+
+ドキュメント構造の同期漏れは次で確認できます。
+
+```powershell
+docker compose run --rm docs python scripts/validate_docs.py
+```
 
 コンテナを停止する場合は次を実行します。
 

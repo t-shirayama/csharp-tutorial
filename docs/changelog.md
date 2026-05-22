@@ -4,6 +4,13 @@
 
 ## 2026-05-22
 
+- Docker と CI が `requirements.lock` を使うようにし、MkDocs 周辺の推移的依存を固定した。
+- `requirements.lock` の再生成を Dockerfile と同じ Python 3.14 slim image で実行できる `docker compose run --rm lock` に統一した。
+- `.dockerignore` を追加し、Docker build context から生成物、Git 管理情報、作業記録、一時ファイルを除外した。
+- `scripts/validate_docs.py` を追加し、MkDocs nav、全記事索引、ローカル Markdown リンクの同期漏れを CI で検出できるようにした。
+- README に公開サイト URL、strict build、依存 lock 更新、ドキュメント構造検証の手順を追加した。
+- `docs/01_基礎文法/02_変数と型.md` のコードコメントを、各行で注目する型の意味が分かる内容に整理した。
+- Dependabot PR を反映し、`actions/dependency-review-action` を v5、`hadolint/hadolint-action` を v3.3.0 に更新した。
 - Dependabot の PR 先を `develop` に変更し、`develop` 宛 PR で security check と CodeQL が走るブランチ運用へ変更。`main` は GitHub Pages 公開用として、直接更新せず `develop` から PR で反映する方針を README に追加。
 - CI セキュリティ対策として Dependabot、CodeQL、Dependency Review、Gitleaks、actionlint、zizmor、Hadolint、OpenSSF Scorecard、CODEOWNERS、SECURITY.md を追加し、Docker base image と Python 依存の固定、GitHub Actions の権限と checkout 設定を強化。README に対策内容を整理し、GitHub Pages の説明セクションを削除。
 - `09_データアクセス` に EF Core パフォーマンス診断、Raw SQL と Dapper 併用、DB 製品差分、複数 DbContext と Read / Write 分離の記事を追加し、DB 性能・設計判断の実務サンプルを補強。

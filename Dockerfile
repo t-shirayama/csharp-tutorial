@@ -6,8 +6,8 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     PIP_NO_CACHE_DIR=1
 
-COPY requirements.txt .
-RUN python -m pip install -r requirements.txt
+COPY requirements.lock .
+RUN python -m pip install -r requirements.lock
 
 EXPOSE 8000
 

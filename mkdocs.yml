@@ -22,7 +22,6 @@ theme:
     text: Noto Sans JP
     code: JetBrains Mono
   features:
-    - navigation.expand
     - navigation.footer
     - navigation.top
     - navigation.tracking
