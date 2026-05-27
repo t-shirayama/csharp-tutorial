@@ -29,5 +29,5 @@ dotnet test --configuration Release
 
 ## 関連リンク
 
-- [../08_テストと品質/12_CIでテストを実行する.md](../08_テストと品質/12_CIでテストを実行する.md)
-- [../11_ツールと運用/08_global-json.md](../11_ツールと運用/08_global-json.md)
+- [CI でテストを実行する](../08_テストと品質/12_CIでテストを実行する.md)
+- [global.json](../11_ツールと運用/08_global-json.md)

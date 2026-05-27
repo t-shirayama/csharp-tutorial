@@ -4,18 +4,18 @@
 
 ## 記事
 
-- [01_dotnetCLI.md](01_dotnetCLI.md)
-- [02_NuGet.md](02_NuGet.md)
-- [03_solutionとproject.md](03_solutionとproject.md)
-- [04_appsettings.md](04_appsettings.md)
-- [05_GitHubActions.md](05_GitHubActions.md)
-- [06_Docker.md](06_Docker.md)
-- [07_releaseとversioning.md](07_releaseとversioning.md)
-- [08_global-json.md](08_global-json.md)
-- [09_ローカルツールとmanifest.md](09_ローカルツールとmanifest.md)
-- [10_Secret管理.md](10_Secret管理.md)
-- [11_デプロイ前チェックリスト.md](11_デプロイ前チェックリスト.md)
-- [12_デプロイ失敗時の診断.md](12_デプロイ失敗時の診断.md)
+- [dotnet CLI](01_dotnetCLI.md)
+- [NuGet](02_NuGet.md)
+- [solution と project](03_solutionとproject.md)
+- [appsettings](04_appsettings.md)
+- [GitHub Actions](05_GitHubActions.md)
+- [Docker](06_Docker.md)
+- [release と versioning](07_releaseとversioning.md)
+- [global.json](08_global-json.md)
+- [ローカルツールと manifest](09_ローカルツールとmanifest.md)
+- [Secret 管理](10_Secret管理.md)
+- [デプロイ前チェックリスト](11_デプロイ前チェックリスト.md)
+- [デプロイ失敗時の診断](12_デプロイ失敗時の診断.md)
 
 ## 到達目標
 

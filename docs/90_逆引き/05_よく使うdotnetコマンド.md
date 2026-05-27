@@ -34,4 +34,4 @@ dotnet list package
 
 ## 関連
 
-- [../11_ツールと運用/01_dotnetCLI.md](../11_ツールと運用/01_dotnetCLI.md)
+- [dotnet CLI](../11_ツールと運用/01_dotnetCLI.md)

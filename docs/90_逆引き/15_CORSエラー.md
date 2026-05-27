@@ -51,6 +51,6 @@ app.UseCors("Frontend");
 
 ## 関連リンク
 
-- [../10_WebとAPI/13_CORS.md](../10_WebとAPI/13_CORS.md)
-- [../10_WebとAPI/09_Middleware.md](../10_WebとAPI/09_Middleware.md)
-- [../10_WebとAPI/07_AuthenticationAuthorization.md](../10_WebとAPI/07_AuthenticationAuthorization.md)
+- [CORS](../10_WebとAPI/13_CORS.md)
+- [Middleware](../10_WebとAPI/09_Middleware.md)
+- [Authentication / Authorization](../10_WebとAPI/07_AuthenticationAuthorization.md)

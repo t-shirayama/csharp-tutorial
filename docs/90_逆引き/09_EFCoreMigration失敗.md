@@ -29,6 +29,6 @@ dotnet ef dbcontext list
 
 ## 関連リンク
 
-- [../09_データアクセス/05_Migration.md](../09_データアクセス/05_Migration.md)
-- [../09_データアクセス/10_接続文字列とSecret.md](../09_データアクセス/10_接続文字列とSecret.md)
-- [../11_ツールと運用/09_ローカルツールとmanifest.md](../11_ツールと運用/09_ローカルツールとmanifest.md)
+- [Migration](../09_データアクセス/05_Migration.md)
+- [接続文字列と Secret](../09_データアクセス/10_接続文字列とSecret.md)
+- [ローカルツールと manifest](../11_ツールと運用/09_ローカルツールとmanifest.md)

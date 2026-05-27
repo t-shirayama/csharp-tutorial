@@ -46,6 +46,6 @@ builder.Services.AddRateLimiter(options =>
 
 ## 関連リンク
 
-- [../10_WebとAPI/14_RateLimitingとCaching.md](../10_WebとAPI/14_RateLimitingとCaching.md)
-- [../05_非同期と並行処理/09_タイムアウトとリトライ.md](../05_非同期と並行処理/09_タイムアウトとリトライ.md)
-- [../04_標準ライブラリ/16_TimeSpan.md](../04_標準ライブラリ/16_TimeSpan.md)
+- [Rate Limiting と Caching](../10_WebとAPI/14_RateLimitingとCaching.md)
+- [タイムアウトとリトライ](../05_非同期と並行処理/09_タイムアウトとリトライ.md)
+- [TimeSpan](../04_標準ライブラリ/16_TimeSpan.md)

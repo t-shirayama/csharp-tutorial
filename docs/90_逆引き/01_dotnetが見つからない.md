@@ -28,4 +28,4 @@ $env:PATH
 
 ## 関連
 
-- [../00_環境構築/01_dotnet-sdk.md](../00_環境構築/01_dotnet-sdk.md)
+- [.NET SDK のインストールと確認](../00_環境構築/01_dotnet-sdk.md)

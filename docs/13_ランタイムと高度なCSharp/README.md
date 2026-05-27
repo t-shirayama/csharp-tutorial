@@ -4,14 +4,14 @@ C# と .NET runtime の深い仕組み、性能、メモリ、assembly、plugin 
 
 ## 記事
 
-- [01_CLRとマネージコード.md](01_CLRとマネージコード.md)
-- [02_GCとオブジェクト寿命.md](02_GCとオブジェクト寿命.md)
-- [03_ファイナライゼーション.md](03_ファイナライゼーション.md)
-- [04_ボックス化と値型.md](04_ボックス化と値型.md)
-- [05_アセンブリとメタデータ.md](05_アセンブリとメタデータ.md)
-- [06_AssemblyLoadContextとプラグイン.md](06_AssemblyLoadContextとプラグイン.md)
-- [07_SpanとMemory.md](07_SpanとMemory.md)
-- [08_ReadOnlySequenceとPipelines.md](08_ReadOnlySequenceとPipelines.md)
+- [CLR とマネージコード](01_CLRとマネージコード.md)
+- [GC とオブジェクト寿命](02_GCとオブジェクト寿命.md)
+- [ファイナライゼーション](03_ファイナライゼーション.md)
+- [ボックス化と値型](04_ボックス化と値型.md)
+- [アセンブリとメタデータ](05_アセンブリとメタデータ.md)
+- [AssemblyLoadContext とプラグイン](06_AssemblyLoadContextとプラグイン.md)
+- [Span と Memory](07_SpanとMemory.md)
+- [ReadOnlySequence と Pipelines](08_ReadOnlySequenceとPipelines.md)
 
 ## 到達目標
 

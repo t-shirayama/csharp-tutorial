@@ -46,6 +46,6 @@ catch (HttpRequestException exception)
 
 ## 関連リンク
 
-- [../05_非同期と並行処理/02_async-await.md](../05_非同期と並行処理/02_async-await.md)
-- [../05_非同期と並行処理/03_CancellationToken.md](../05_非同期と並行処理/03_CancellationToken.md)
-- [../05_非同期と並行処理/07_非同期処理のよくある落とし穴.md](../05_非同期と並行処理/07_非同期処理のよくある落とし穴.md)
+- [async / await](../05_非同期と並行処理/02_async-await.md)
+- [CancellationToken](../05_非同期と並行処理/03_CancellationToken.md)
+- [非同期処理のよくある落とし穴](../05_非同期と並行処理/07_非同期処理のよくある落とし穴.md)
