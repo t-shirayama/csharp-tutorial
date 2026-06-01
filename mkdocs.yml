@@ -27,6 +27,8 @@ theme:
     - navigation.footer
     - navigation.indexes
     - navigation.sections
+    - navigation.tabs
+    - navigation.tabs.sticky
     - navigation.top
     - navigation.tracking
     - search.highlight
@@ -178,7 +180,7 @@ nav:
           - '型設計の選び方': 06_型システムと言語機能/17_型設計の選び方.md
           - 'Result 型とジェネリック設計': 06_型システムと言語機能/18_Result型とジェネリック設計.md
           - '属性と Reflection の実務利用': 06_型システムと言語機能/19_属性とReflectionの実務利用.md
-  - 実務編:
+  - 実践編:
       - '07_設計と実務パターン':
           - 07_設計と実務パターン/README.md
           - 'SOLID 原則': 07_設計と実務パターン/01_SOLID原則.md
