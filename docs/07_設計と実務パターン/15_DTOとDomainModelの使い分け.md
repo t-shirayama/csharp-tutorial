@@ -19,6 +19,12 @@ Request / Response DTO、Entity、Domain Model、ViewModel の役割を分け、
 - Response DTO は外部へ公開する契約です。Domain Model や DB Entity をそのまま返すと、内部構造や不要な情報まで API 契約に漏れることがあります。
 - 変換処理は境界に置きます。Controller / endpoint、Application Service、assembler / mapper など、どこで変換するかを決めて散らばらないようにします。
 
+- 注意: Request DTO をそのまま DB Entity として保存する。
+- 注意: DB Entity をそのまま API response にする。
+- 注意: Domain Model が getter / setter だけになり、業務ルールが service に散らばる。
+- 注意: 変換処理が Controller、Service、Repository に分散する。
+- 注意: DTO に validation や表示都合を詰め込みすぎ、用途が曖昧になる。
+
 ## 悪い例
 
 ```csharp
@@ -99,19 +105,9 @@ public class Order
 public record OrderLine(string ProductCode, int Quantity);
 ```
 
-## コードの読み方
-
 悪い例では、DB Entity を API response としてそのまま返しています。これは短く書けますが、内部メモや管理用項目が外へ出る危険があります。また、DB の列名や構造変更が API 契約の変更に直結します。
 
 改善例では、外部へ返す値を `OrderResponse` に限定しています。Request DTO と Domain Model の例では、外部入力は DTO で受け、業務ルールは `Order` の constructor や `AddLine` に置いています。
-
-## よくあるミス
-
-- Request DTO をそのまま DB Entity として保存する。
-- DB Entity をそのまま API response にする。
-- Domain Model が getter / setter だけになり、業務ルールが service に散らばる。
-- 変換処理が Controller、Service、Repository に分散する。
-- DTO に validation や表示都合を詰め込みすぎ、用途が曖昧になる。
 
 ## 実務での使い方
 

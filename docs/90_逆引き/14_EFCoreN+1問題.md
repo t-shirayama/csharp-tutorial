@@ -30,8 +30,6 @@ var orders = await dbContext.Orders
     .ToListAsync(cancellationToken);
 ```
 
-## コードの読み方
-
 `Select` で一覧に必要な形へ直接変換します。`AsNoTracking` は読み取り専用 query で Change Tracker の負荷を避けるために使います。SQL がどうなるかは `ToQueryString()` や log で確認します。
 
 ## 解決手順

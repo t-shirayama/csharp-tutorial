@@ -19,6 +19,12 @@
 - generic 型は便利ですが、型 parameter が増えすぎると読みにくくなります。`Result<TValue, TError>` のような設計は表現力が上がる一方で、学習コストも上がります。
 - 実務では、成功値、失敗理由、呼び出し側の扱いやすさを考えて設計します。型で意図を表せると、呼び出し側が null や例外に頼りすぎずに済みます。
 
+- 注意: 想定外の障害まで全部 `Result<T>` に詰め込み、ログや例外処理が曖昧になる。
+- 注意: `Result<T>` の `Value` を成功確認せずに使う。
+- 注意: error message だけで分岐し、呼び出し側が文字列比較に依存する。
+- 注意: `ApiResponse<T>` と HTTP status / ProblemDetails の役割が重複する。
+- 注意: generic 化しすぎて、具体的な業務意図が読めなくなる。
+
 ## Result 型の例
 
 ```csharp
@@ -81,19 +87,9 @@ var response = ApiResponse<string>.Ok("created");
 Console.WriteLine(response.Data);
 ```
 
-## コードの読み方
-
 `Result<T>` は成功時に `T` の値を持ち、失敗時に error message を持ちます。呼び出し側は `IsSuccess` を見て、成功値を使うか失敗を扱うかを分けます。
 
 この例では単純にするため `Value!` を使っていますが、実務では成功時だけ値を安全に取り出せる API にする、失敗理由を enum や専用 error 型にするなど、誤用しにくい設計を検討します。
-
-## よくあるミス
-
-- 想定外の障害まで全部 `Result<T>` に詰め込み、ログや例外処理が曖昧になる。
-- `Result<T>` の `Value` を成功確認せずに使う。
-- error message だけで分岐し、呼び出し側が文字列比較に依存する。
-- `ApiResponse<T>` と HTTP status / ProblemDetails の役割が重複する。
-- generic 化しすぎて、具体的な業務意図が読めなくなる。
 
 ## 実務での使い方
 

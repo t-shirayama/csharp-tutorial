@@ -15,6 +15,8 @@
 - `ReadOnlySpan<T>` は読み取り専用の view です。
 - `Memory<T>` は async method や field に保持しやすい wrapper です。
 - slicing は元データの view を作るため、コピー削減に役立ちます。
+- 注意: `Span<T>` は field に保存できず、async method をまたいで保持できません。
+- 注意: 読みやすさより先に micro optimization を優先しないようにします。
 
 ## コード例
 
@@ -30,19 +32,11 @@ var day = span[8..10];
 Console.WriteLine($"{year}/{month}/{day}");
 ```
 
-## コードの読み方
-
 `AsSpan` は文字列の view を作ります。`span[..4]` などの slice は、元の文字列を新しい文字列へコピーせずに範囲を参照します。
 
 ## 実務での使い方
 
 高頻度 parsing、protocol 処理、buffer 処理、allocation 削減が必要な場面で使います。通常の業務ロジックでは、読みやすさを優先して string や collection を使って問題ありません。
-
-## よくあるミス
-
-- `Span<T>` を field に保存しようとする。
-- async method をまたいで `Span<T>` を保持しようとする。
-- 読みやすさより先に micro optimization を優先する。
 
 ## 関連リンク
 

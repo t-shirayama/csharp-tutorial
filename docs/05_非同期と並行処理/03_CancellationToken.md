@@ -9,6 +9,9 @@
 - `CancellationToken` はキャンセル要求を伝えるための値です。
 - 受け取った token は、さらに下位の async API へ渡します。
 - キャンセルは失敗ではなく、利用者が処理停止を要求した状態です。
+- 注意: token を受け取るだけで下位処理に渡さない。
+- 注意: キャンセル例外を通常エラーとしてログに大量出力する。
+- 注意: キャンセルできない無限ループを書く。
 
 ## コード例
 
@@ -21,19 +24,9 @@ static async Task<string> DownloadAsync(string url, CancellationToken cancellati
 }
 ```
 
-## コードの読み方
-
-このコード例は「CancellationToken」の基本形を確認するためのものです。上から順に、値や object を用意し、C# の構文や .NET API を使い、最後に結果を確認します。まず入力、処理、出力の 3 つに分けて読むと、初学者でも流れを追いやすくなります。
-
 ## 実務での使い方
 
 Web API のリクエスト中断、画面操作のキャンセル、バッチ停止で重要です。ASP.NET Core では `HttpContext.RequestAborted` や action 引数の `CancellationToken` を下位処理へ渡します。
-
-## よくあるミス
-
-- token を受け取るだけで下位処理に渡さない。
-- キャンセル例外を通常エラーとしてログに大量出力する。
-- キャンセルできない無限ループを書く。
 
 ## 関連リンク
 

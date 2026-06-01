@@ -37,17 +37,9 @@ public class CalculatorTests
 dotnet test
 ```
 
-## コードの読み方
-
 `CalculatorTests` は `Calculator` の仕様を確認する test class です。`[Fact]` が付いた `Add_ReturnsSum` は、引数なしで1つの仕様を検証するテストです。`var result = calculator.Add(1, 2);` が実行対象、`Assert.Equal(3, result);` が期待結果の確認です。失敗したときに「足し算が期待値を返さない」と分かる名前にしています。
 
 複数の入力値を同じ仕様で確認する場合は [境界値と例外のテスト](14_境界値と例外のテスト.md)、非同期 method を確認する場合は [非同期処理のテスト](15_非同期処理のテスト.md) へ進みます。
-
-## よくあるミス
-
-- テスト名が `Test1` のまま。
-- 1つのテストで多くの仕様を確認しすぎる。
-- 外部 API や現在時刻に依存して不安定になる。
 
 ## 関連リンク
 

@@ -12,8 +12,12 @@
 ## 要点
 
 - `TimeSpan` は時刻ではなく期間を表します。
+- 注意: local time で期限計算し、time
 - timeout、retry interval、経過時間、期限計算でよく使います。
 - 日付や time zone を含む意味は `DateTimeOffset` と分けて考えます。
+- 注意: `TimeSpan.Seconds` と `TimeSpan.TotalSeconds` を混同する。
+- 注意: local time で期限計算し、time zone や daylight saving に影響される。
+- 注意: 設定値の単位が曖昧なまま使う。
 
 ## コード例
 
@@ -28,19 +32,13 @@ var elapsed = DateTimeOffset.UtcNow - startedAt;
 Console.WriteLine(elapsed < timeout);
 ```
 
-## コードの読み方
-
 `TimeSpan.FromSeconds` は「3 秒間」という期間を作ります。`DateTimeOffset` 同士を引くと経過時間として `TimeSpan` が得られます。時刻そのものと、時刻同士の差分を分けて読むのが大事です。
 
 ## 実務での使い方
 
 HTTP timeout、cache lifetime、retry interval、session 有効期間、batch の所要時間計測で使います。設定値から読む場合は単位を明確にし、秒なのかミリ秒なのかを名前に含めます。
 
-## よくあるミス
-
-- `TimeSpan.Seconds` と `TimeSpan.TotalSeconds` を混同する。
-- local time で期限計算し、time zone や daylight saving に影響される。
-- 設定値の単位が曖昧なまま使う。
+ zone や daylight saving に影響される。
 
 ## 関連リンク
 

@@ -19,6 +19,12 @@
 - 外部 API は unit test では fake / stub にし、実物確認は integration test として実行条件を分けます。
 - 並列実行で衝突するテストは、データを一意にする、transaction を分ける、collection fixture を使うなど、衝突をなくす設計を優先します。
 
+- 注意: CI で落ちたテストを rerun して通れば問題なしにする。
+- 注意: `Thread.Sleep` や `Task.Delay` を増やして失敗率だけ下げる。
+- 注意: test data を固定 ID で共有し、並列実行で衝突する。
+- 注意: 外部 API の一時障害で unit test が落ちる。
+- 注意: skip したテストを放置する。
+
 ## flaky になりやすい悪い例
 
 ```csharp
@@ -87,21 +93,11 @@ public void IsExpired_ReturnsTrue_WhenNowIsAfterExpiresAt()
 | 並列実行 | shared state を消す、必要なら collection を分ける |
 | 実行順序依存 | 各テストを独立させる |
 
-## コードの読み方
-
 悪い例では、`Task.Delay(100)` が「100ms 待てば終わるはず」という環境依存の仮定になっています。CPU 負荷や CI の遅さで処理が終わらない可能性があります。改善例では、`ProcessAsync` の完了を `await` しているため、テストは実際の終了条件に基づいて進みます。
 
 ## 実務での使い方
 
 CI でたまに失敗するテストは、優先度を下げずに調査します。失敗ログ、実行時刻、runner、並列数、直前の変更、外部サービス状態を記録します。やむを得ず一時的に skip する場合は、理由、期限、再有効化の issue を残します。
-
-## よくあるミス
-
-- CI で落ちたテストを rerun して通れば問題なしにする。
-- `Thread.Sleep` や `Task.Delay` を増やして失敗率だけ下げる。
-- test data を固定 ID で共有し、並列実行で衝突する。
-- 外部 API の一時障害で unit test が落ちる。
-- skip したテストを放置する。
 
 ## 関連リンク
 

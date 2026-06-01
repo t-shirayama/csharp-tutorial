@@ -17,6 +17,10 @@
 - constructor は不正な値を防ぎたい domain model に向いています。`required` / `init` は object initializer と相性がよい DTO や設定 class に向いています。
 - `required`、`init`、nullable reference types は組み合わせて使います。必須か任意か、作成後に変更してよいか、不正値をどこで止めるかを分けて考えます。
 
+- 注意: `required` が null や空文字を完全に防ぐと思う。
+- 注意: 変更が必要な property まで `init` にする。
+- 注意: constructor validation と object initializer の責務を混同する。
+
 ## コード例
 
 ```csharp
@@ -37,8 +41,6 @@ var profile = new UserProfile
 };
 ```
 
-## コードの読み方
-
 `DisplayName` は必須項目なので `required` を付けています。`Bio` は任意入力なので `string?` にしています。どちらも `init` のため、object initializer で作成した後に値を書き換えにくい型になります。
 
 ただし `required` は「設定したか」を compiler に知らせる機能であり、空文字や不正値までは防ぎません。外部入力では validation と組み合わせます。
@@ -48,12 +50,6 @@ var profile = new UserProfile
 DTO、設定 class、読み取りモデルで使いやすい機能です。外部入力の検証は validation と組み合わせます。
 
 型ごとの選び方は [型設計の選び方](17_型設計の選び方.md) で扱います。
-
-## よくあるミス
-
-- `required` が null や空文字を完全に防ぐと思う。
-- 変更が必要な property まで `init` にする。
-- constructor validation と object initializer の責務を混同する。
 
 ## 関連リンク
 

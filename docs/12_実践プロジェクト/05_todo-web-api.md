@@ -63,8 +63,6 @@ app.MapPost("/todos", async (
 });
 ```
 
-## コードの読み方
-
 endpoint は request、service、logger、`CancellationToken` を DI から受け取ります。validation で入力を早く止め、service に業務処理を渡し、成功したら `201 Created` を返します。ログには title そのものではなく `TodoId` を出し、個人情報や長い本文を残さないようにします。
 
 ## 完了条件

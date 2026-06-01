@@ -32,8 +32,6 @@ builder.Services.AddRateLimiter(options =>
 });
 ```
 
-## コードの読み方
-
 `PermitLimit` は window 内で許可する request 数です。`Window` は集計する時間幅です。制限を超えた request は拒否されるため、client 側では retry 間隔や user への表示も考えます。
 
 ## 解決手順

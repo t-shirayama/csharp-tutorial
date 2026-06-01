@@ -13,6 +13,10 @@
 - binary I/O は byte 単位の形式を読み書きします。
 - 独自 binary format、通信 protocol、画像や音声の header 解析で出てきます。
 - 文字列ファイルと違い、endianness や format version を意識します。
+- 注意: 書き込み順と読み取り順を変える。
+- 注意: endianness を考慮しない。
+- 注意: format version を持たず、将来変更できなくなる。
+- 注意: text data なのに binary として扱い、調査しにくくする。
 
 ## コード例
 
@@ -36,20 +40,11 @@ using (var reader = new BinaryReader(stream, Encoding.UTF8))
 }
 ```
 
-## コードの読み方
-
 書き込んだ順番と同じ順番で読み取っています。binary format は順序や型がずれると正しく読めません。長期保存や外部連携では format version を持たせる設計が重要です。
 
 ## 実務での使い方
 
 業務アプリでは JSON や CSV の方が多いですが、性能やサイズ、既存 protocol の都合で binary を扱うことがあります。独自 format を作る前に、既存仕様や serializer を検討します。
-
-## よくあるミス
-
-- 書き込み順と読み取り順を変える。
-- endianness を考慮しない。
-- format version を持たず、将来変更できなくなる。
-- text data なのに binary として扱い、調査しにくくする。
 
 ## 関連リンク
 

@@ -11,6 +11,10 @@
 - Adapter は既存のインターフェイスを利用側に合わせます。外部 API client や legacy library の戻り値を、自分たちの domain model に変換するときに使います。
 - パターンは目的ではなく手段です。`if` が1つだけの単純な処理に無理に適用すると、class 数だけが増えて読みにくくなります。
 
+- 注意: 単純な if で十分な場所に過剰なパターンを入れる。
+- 注意: パターンのためにクラス数だけ増える。
+- 注意: 名前だけ Factory で責務が曖昧。
+
 ## Strategy と Factory の例
 
 ```csharp
@@ -59,19 +63,11 @@ public class CustomerAdapter
 }
 ```
 
-## コードの読み方
-
 Strategy の例では、割引計算の入口を `IDiscountStrategy` に揃えています。Factory は顧客ランクから使う strategy を選びます。Adapter の例では、外部 API の `CustomerCode` と `DisplayName` を、自社で使う `Customer` の `Code` と `Name` に変換しています。
 
 ## 実務での使い方
 
 決済方法ごとの処理、通知手段の切り替え、外部 API クライアントの差し替えなどで使います。パターン名を当てはめるより、変更点を局所化できるかを見ます。
-
-## よくあるミス
-
-- 単純な if で十分な場所に過剰なパターンを入れる。
-- パターンのためにクラス数だけ増える。
-- 名前だけ Factory で責務が曖昧。
 
 ## 関連リンク
 

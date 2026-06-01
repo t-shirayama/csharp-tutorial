@@ -37,8 +37,6 @@ var app = builder.Build();
 app.UseCors("Frontend");
 ```
 
-## コードの読み方
-
 `WithOrigins` は browser からの許可元を限定します。`AllowAnyOrigin` と credentials の併用は危険なため避けます。CORS は browser の安全機構なので、API server 同士の通信失敗とは切り分けます。
 
 ## 解決手順

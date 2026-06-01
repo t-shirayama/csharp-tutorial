@@ -13,6 +13,12 @@
 - 自作 attribute は `Attribute` を継承します。
 - attribute を付けるだけでは動かず、読む側の処理が必要です。
 
+- 注意: attribute が何に読まれているか理解しない。
+- 注意: 設定を attribute に散らばらせすぎる。
+- 注意: 自作 attribute を作っただけで、読む処理を実装していない。
+- 注意: `AttributeUsage` を指定せず、意図しない場所に付けられる。
+- 注意: reflection を大量に使い、性能やリファクタリング耐性を落とす。
+
 ## コード例
 
 ```csharp
@@ -56,8 +62,6 @@ var attribute = typeof(CreateOrderHandler)
 Console.WriteLine(attribute?.Action);
 ```
 
-## コードの読み方
-
 `Obsolete` は compiler や IDE が読み取り、古い API の利用を警告する attribute です。
 
 `AuditAttribute` は class と method にだけ付けられるようにしています。`GetCustomAttributes` で reflection 経由に取得できます。framework の多くは、このように attribute を読み取って動作を変えます。
@@ -67,14 +71,6 @@ Console.WriteLine(attribute?.Action);
 xUnit の `[Fact]`、ASP.NET Core の `[HttpGet]`、JSON の `[JsonPropertyName]`、validation attribute、source generator、analyzer などで使います。attribute は宣言的で便利ですが、処理の流れが見えにくくなる面もあります。
 
 自作 attribute は便利ですが、読む処理が必要です。設定や DI、明示的な method 呼び出しで表せる場合は、そちらの方が読みやすいことがあります。
-
-## よくあるミス
-
-- attribute が何に読まれているか理解しない。
-- 設定を attribute に散らばらせすぎる。
-- 自作 attribute を作っただけで、読む処理を実装していない。
-- `AttributeUsage` を指定せず、意図しない場所に付けられる。
-- reflection を大量に使い、性能やリファクタリング耐性を落とす。
 
 ## 関連リンク
 

@@ -13,6 +13,12 @@
 - `EnsureSuccessStatusCode()` は 2xx 以外を例外にします。便利ですが、404 や 409 のように業務上意味のある status を個別に扱いたい場合は、自分で status code を判定します。
 - request body や response body には個人情報や secret が含まれることがあります。ログへ丸ごと出すのではなく、必要な情報だけを masking して記録します。
 - 外部 API 呼び出しは境界です。呼び出し元の業務 service に HTTP の詳細を散らさず、typed client や専用 service に閉じ込めるとテストと変更がしやすくなります。
+- 注意: リクエストごとに `new HttpClient()` してソケット枯渇を招く。
+- 注意: 1つの長寿命 `HttpClient` を使う場合に DNS 変更へ追従する設定を考えない。
+- 注意: ステータスコードを見ずに本文だけ読む。
+- 注意: タイムアウトやキャンセルを設定しない。
+- 注意: API ごとの設定が `Program.cs` に散らばる。
+- 注意: 例外や non-success status の扱いを決めていない。
 
 ## コード例
 
@@ -56,8 +62,6 @@ public class WeatherApiClient
 }
 ```
 
-## コードの読み方
-
 最初のコード例は `HttpClient` の最小形です。`GetAsync` で request を送り、`EnsureSuccessStatusCode` で 2xx 以外を例外にし、body を文字列として読みます。
 
 typed client の例では、`AddHttpClient<WeatherApiClient>` が設定済みの `HttpClient` を DI に登録します。外部 API ごとの URL や timeout を client に閉じ込めることで、呼び出し側は HTTP の詳細を意識しなくて済みます。
@@ -67,15 +71,6 @@ typed client の例では、`AddHttpClient<WeatherApiClient>` が設定済みの
 外部 API 連携、社内サービス呼び出し、Webhook、認証サーバー連携で使います。ASP.NET Core では `IHttpClientFactory` を使って named client や typed client を定義することが多いです。
 
 外部 API ごとに typed client を作り、URL、timeout、認証 header、ログ、リトライ方針をまとめます。秘密情報は設定や secret 管理から渡します。
-
-## よくあるミス
-
-- リクエストごとに `new HttpClient()` してソケット枯渇を招く。
-- 1つの長寿命 `HttpClient` を使う場合に DNS 変更へ追従する設定を考えない。
-- ステータスコードを見ずに本文だけ読む。
-- タイムアウトやキャンセルを設定しない。
-- API ごとの設定が `Program.cs` に散らばる。
-- 例外や non-success status の扱いを決めていない。
 
 ## 関連リンク
 

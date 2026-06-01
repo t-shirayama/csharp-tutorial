@@ -32,8 +32,6 @@ catch (HttpRequestException exception)
 }
 ```
 
-## コードの読み方
-
 `await` は `SendEmailAsync` の完了を待ち、失敗した場合は例外を現在の method へ戻します。`async void` にすると呼び出し元が完了や失敗を追いにくくなるため、通常は `Task` を返します。
 
 ## 解決手順

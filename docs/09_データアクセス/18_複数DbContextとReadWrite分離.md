@@ -17,6 +17,9 @@
 - read model と write model を分けると、一覧取得を軽くしやすい一方で整合性の設計が必要です。
 - 同じ transaction で複数 DbContext を扱う設計は複雑です。まず境界を小さくします。
 - migration の管理単位、connection string、schema、test 方針を先に決めます。
+- 注意: 責務が曖昧なまま DbContext だけ増やすと、migration や transaction 境界が分かりにくくなります。
+- 注意: read model を更新処理に使わないようにし、同期遅延がある場合は API 仕様にも反映します。
+- 注意: transaction 境界を広げすぎると、障害時の復旧が難しくなります。
 
 ## DbContext を分ける例
 
@@ -45,21 +48,11 @@ public sealed class ReportingDbContext(DbContextOptions<ReportingDbContext> opti
 }
 ```
 
-## コードの読み方
-
 `SalesDbContext` は更新を含む業務処理、`ReportingDbContext` は集計や一覧表示に分けています。`ProductSalesSummary` は key を持たない view として扱い、更新対象にしていません。読み取り専用 context を分けると、`Include` の多用や巨大な entity graph を避けやすくなります。
 
 ## 実務での使い方
 
 最初から複数 DbContext にする必要はありません。1つの DbContext が大きくなり、責務や migration の衝突、query 性能、権限境界が問題になったときに検討します。read / write 分離を導入する場合は、整合性、同期遅延、障害時の再実行を設計に含めます。
-
-## よくあるミス
-
-- 責務が曖昧なまま DbContext だけ増やす。
-- read model を更新処理に使ってしまう。
-- 複数 DbContext の migration 出力先を混ぜる。
-- transaction 境界を広げすぎて、障害時の復旧が難しくなる。
-- read / write 分離を入れたのに、同期遅延を API 仕様に書かない。
 
 ## 関連リンク
 

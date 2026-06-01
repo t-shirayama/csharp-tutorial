@@ -4,6 +4,12 @@
 
 C# をビルド・実行するための .NET SDK を入れ、`dotnet` コマンドが使えることを確認します。
 
+## 要点
+
+- 注意: Runtime だけを入れている。
+- 注意: インストール後に古い PowerShell や VS Code を使い続けている。
+- 注意: Windows x64 ではなく x86 installer を選んでいる。
+
 ## 必要なもの
 
 - Windows
@@ -46,12 +52,6 @@ dotnet run
 ```
 
 `Hello, World!` が表示されれば成功です。
-
-## よくあるミス
-
-- Runtime だけを入れている。
-- インストール後に古い PowerShell や VS Code を使い続けている。
-- Windows x64 ではなく x86 installer を選んでいる。
 
 ## 関連リンク
 

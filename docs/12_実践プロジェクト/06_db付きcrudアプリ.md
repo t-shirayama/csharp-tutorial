@@ -49,8 +49,6 @@ app.MapGet("/products", async (AppDbContext dbContext, CancellationToken cancell
 });
 ```
 
-## コードの読み方
-
 一覧 endpoint では更新しないため `AsNoTracking()` を使います。`Select` で entity ではなく response DTO に projection し、API に必要な列だけを取得します。`Take(50)` は無制限取得を防ぐための上限です。実務では page number や cursor を request として受け取ります。
 
 ## 完了条件

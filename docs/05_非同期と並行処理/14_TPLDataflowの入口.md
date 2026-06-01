@@ -15,6 +15,9 @@
 - `TransformBlock` は入力を変換します。
 - `ActionBlock` は入力を処理します。
 - backpressure や並列度を設定できます。
+- 注意: `Complete` を呼ばず、後段が終了しない。
+- 注意: `Completion` を待たず、処理途中でアプリが終了する。
+- 注意: 並列度や bounded capacity を設定せず、外部サービスへ過剰に流す。
 
 ## パッケージ
 
@@ -39,19 +42,11 @@ transform.Complete();
 await output.Completion;
 ```
 
-## コードの読み方
-
 `TransformBlock` が文字列を大文字に変換し、`ActionBlock` が出力します。`PropagateCompletion` により、前段の完了が後段へ伝わります。
 
 ## 実務での使い方
 
 画像処理、ファイル変換、外部 API 連携、ETL のように、複数段の処理を安全に流したい場合に候補になります。単純な producer / consumer なら `Channel<T>` の方が軽いこともあります。
-
-## よくあるミス
-
-- `Complete` を呼ばず、後段が終了しない。
-- `Completion` を待たず、処理途中でアプリが終了する。
-- 並列度や bounded capacity を設定せず、外部サービスへ過剰に流す。
 
 ## 関連リンク
 

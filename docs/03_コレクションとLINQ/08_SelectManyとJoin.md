@@ -14,6 +14,9 @@
 - `SelectMany` は複数の内側コレクションを1つの列に平坦化します。
 - `Join` はキーが一致する要素を結合します。
 - 実務では読みやすさのため、複雑な LINQ を途中変数へ分けます。
+- 注意: `Select` で `IEnumerable<IEnumerable<T>>` を作ってしまう。
+- 注意: `Join` より `Dictionary` の方が読みやすい場面で無理に LINQ を使う。
+- 注意: 複雑な anonymous type が続き、意図が読めなくなる。
 
 ## SelectMany の例
 
@@ -35,19 +38,9 @@ var result = orders.Join(
     (order, customer) => new { order.Id, customer.Name });
 ```
 
-## コードの読み方
-
-このコード例は「SelectMany と Join」の基本形を確認するためのものです。上から順に、値や object を用意し、C# の構文や .NET API を使い、最後に結果を確認します。まず入力、処理、出力の 3 つに分けて読むと、初学者でも流れを追いやすくなります。
-
 ## 実務での使い方
 
 CSV 明細の展開、親子データの集計、メモリ上の小さなマスタ結合などで使います。DB では EF Core が SQL に変換できるかも意識します。
-
-## よくあるミス
-
-- `Select` で `IEnumerable<IEnumerable<T>>` を作ってしまう。
-- `Join` より `Dictionary` の方が読みやすい場面で無理に LINQ を使う。
-- 複雑な anonymous type が続き、意図が読めなくなる。
 
 ## 関連リンク
 

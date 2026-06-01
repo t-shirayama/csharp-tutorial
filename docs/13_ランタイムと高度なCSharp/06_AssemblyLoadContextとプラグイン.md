@@ -14,6 +14,9 @@
 - plugin ごとに依存関係を分離したい場合に使います。
 - unload 可能な context を作ると、plugin を破棄できる設計にできます。
 - 実装は難しいため、まず公式 sample と既存 library を確認します。
+- 注意: plugin assembly、Type、instance、delegate、event handler への参照が残ると unload できません。
+- 注意: default context と plugin context の依存関係を混ぜると load error や境界破壊につながります。
+- 注意: plugin は host の内部型へ直接依存させず、contract assembly 経由で呼び出します。
 
 ## コード例
 
@@ -60,8 +63,6 @@ foreach (var pluginType in pluginTypes)
 }
 ```
 
-## コードの読み方
-
 `AssemblyLoadContext` を作り、指定 path の assembly を読み込んでいます。`isCollectible: true` にすると unload 可能な context になります。ただし、読み込んだ型や instance への参照が残っていると unload されません。
 
 `IPluginCommand` は host と plugin の境界です。`assembly.GetTypes()` で plugin assembly 内の型を探し、interface を実装している具象型だけを作成しています。実務では DI、constructor parameter、例外処理、timeout、権限確認を追加します。
@@ -71,13 +72,6 @@ foreach (var pluginType in pluginTypes)
 plugin architecture、script runner、拡張機能、tooling で使います。通常の Web API や業務アプリでは必要になることは少なく、依存関係を複雑にしやすいため慎重に使います。
 
 plugin を unload したい場合は、plugin instance、Type、Assembly、delegate、event handler への参照を残さないようにします。load error が起きたら、plugin 本体だけでなく依存 assembly の version と配置場所も確認します。
-
-## よくあるミス
-
-- plugin assembly への参照を残し、unload できない。
-- default context と plugin context の依存関係を混ぜる。
-- version 違いの依存 assembly を想定せず load error にする。
-- plugin から host の内部型へ直接依存させ、contract 境界を壊す。
 
 ## 関連リンク
 

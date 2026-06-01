@@ -29,8 +29,6 @@ if (name is not null)
 static string? FindName() => null;
 ```
 
-## コードの読み方
-
 `FindName` の戻り値は `string?` なので、呼び出し側は null の可能性を考える必要があります。`if (name is not null)` の中では compiler が null チェック済みと判断するため、`name.Length` に nullable 警告が出ません。
 
 この例で重要なのは「null を返すこと」自体ではなく、null を返す可能性を型に表して、呼び出し側で明示的に扱うことです。
@@ -38,12 +36,6 @@ static string? FindName() => null;
 ## 実務での使い方
 
 DTO、DB 取得結果、外部 API レスポンスでは null の可能性を明示します。null を許さない値はコンストラクタや validation で守ります。
-
-## よくあるミス
-
-- `!` null 許容抑制演算子で警告だけ消す。
-- null と空文字の意味を決めない。
-- nullable 警告を放置する。
 
 ## 関連リンク
 

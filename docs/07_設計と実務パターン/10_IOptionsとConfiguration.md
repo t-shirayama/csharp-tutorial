@@ -67,8 +67,6 @@ builder.Services
     .ValidateOnStart();
 ```
 
-## コードの読み方
-
 Options class は「設定値を受け取る入れ物」です。`Bind` で `appsettings.json` の `ExternalApi` section を `ExternalApiOptions` に詰め、`Validate` で実行に必要な条件を確認します。
 
 `ValidateOnStart()` を付けると、設定ミスを API 呼び出し時ではなく起動時に検出できます。本番では早く失敗した方が原因を追いやすくなります。
@@ -98,15 +96,6 @@ public class ExternalApiClient
 
 起動時に必須設定を検証すると、実行中の不可解な失敗を減らせます。開発、検証、本番で値をどう切り替えるかも README や運用手順に残します。
 
-## よくあるミス
-
-- `configuration["ExternalApi:BaseUrl"]` をあちこちで直接読む。
-- 起動時 validation がなく、実行中に null や不正 URL で失敗する。
-- 秘密情報を `appsettings.json` にコミットする。
-- Options class に業務ロジックを入れすぎる。
-- 環境ごとの上書き順を理解しない。
-- 設定名が統一されていない。
-
 ## レビュー観点
 
 - 設定 section 名が定数化されているか。
@@ -114,6 +103,13 @@ public class ExternalApiClient
 - 開発、検証、本番で値をどう切り替えるか説明できるか。
 - secret と config を分けて扱っているか。
 - 設定値がコードに直書きされていないか。
+
+- 注意: `configuration["ExternalApi:BaseUrl"]` をあちこちで直接読む。
+- 注意: 起動時 validation がなく、実行中に null や不正 URL で失敗する。
+- 注意: 秘密情報を `appsettings.json` にコミットする。
+- 注意: Options class に業務ロジックを入れすぎる。
+- 注意: 環境ごとの上書き順を理解しない。
+- 注意: 設定名が統一されていない。
 
 ## 関連リンク
 

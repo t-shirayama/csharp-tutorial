@@ -4,6 +4,12 @@
 
 ローカルと CI で使う .NET SDK バージョンをそろえます。
 
+## 要点
+
+- 注意: `global.json` が要求する SDK をローカルに入れていない。
+- 注意: CI だけ古い SDK を使っている。
+- 注意: Runtime と SDK を混同している。
+
 ## 確認
 
 ```powershell
@@ -33,12 +39,6 @@ dotnet new globaljson --sdk-version 10.0.100 --roll-forward latestFeature
 ```
 
 `version` には `10.0.x` のような省略形ではなく、`dotnet --list-sdks` に出る完全な SDK バージョンを書きます。
-
-## よくあるミス
-
-- `global.json` が要求する SDK をローカルに入れていない。
-- CI だけ古い SDK を使っている。
-- Runtime と SDK を混同している。
 
 ## 関連リンク
 

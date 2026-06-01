@@ -14,6 +14,10 @@
 - `Stream` は byte の流れを読む・書くための抽象型です。
 - `FileStream` はファイルに対する stream です。
 - 小さなテキストなら `File.ReadAllText` で十分ですが、大きなファイルや逐次処理では stream を使います。
+- 注意: 大きなファイルを `ReadAllBytes` で一度に読み込み、メモリを圧迫する。
+- 注意: stream の位置を意識せず、読み終わった stream をそのまま再利用する。
+- 注意: `Dispose` せず file handle を開いたままにする。
+- 注意: 文字列データなのに encoding を考えない。
 
 ## コード例
 
@@ -29,20 +33,11 @@ await using var destination = new FileStream(destinationPath, FileMode.Create, F
 await source.CopyToAsync(destination);
 ```
 
-## コードの読み方
-
 `FileStream` は `IDisposable` / `IAsyncDisposable` を実装しています。`await using` により、非同期の破棄処理まで待ってから resource を解放します。`CopyToAsync` は読み取りと書き込みを分割して行うため、大きなファイルでも扱いやすくなります。
 
 ## 実務での使い方
 
 アップロードファイル、CSV 変換、画像や PDF、バックアップ、外部 storage 連携で使います。Web API では request body や response body も stream として扱う場面があります。
-
-## よくあるミス
-
-- 大きなファイルを `ReadAllBytes` で一度に読み込み、メモリを圧迫する。
-- stream の位置を意識せず、読み終わった stream をそのまま再利用する。
-- `Dispose` せず file handle を開いたままにする。
-- 文字列データなのに encoding を考えない。
 
 ## 関連リンク
 

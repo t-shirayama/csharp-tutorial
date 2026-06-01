@@ -14,6 +14,9 @@
 - `delegate` はメソッドを代入できる型です。
 - `event` は外部から購読できる通知口です。
 - 実務では `Action<T>`、`Func<T>`、イベント、LINQ、非同期 callback の理解に関係します。
+- 注意: event を解除せず、長寿命 object から参照され続ける。
+- 注意: event handler の中で例外が出たときの影響範囲を考えない。
+- 注意: delegate、event、interface の使い分けをせず、通知と依存差し替えを混同する。
 
 ## コード例
 
@@ -45,19 +48,11 @@ notifier.OrderSubmitted += (_, args) => Console.WriteLine(args.OrderId);
 notifier.Submit("ORD-001");
 ```
 
-## コードの読み方
-
 `OrderSubmitted` は注文確定という出来事を外部へ知らせる event です。購読側は `+=` で処理を登録します。`?.Invoke` は購読者がいる場合だけ通知します。
 
 ## 実務での使い方
 
 GUI、ドメインイベント、進捗通知、ライブラリの callback で使います。単純に処理を差し替えたいだけなら interface や `Func<T>` の方が読みやすいこともあります。複数の購読者へ通知したい場合は event が自然です。
-
-## よくあるミス
-
-- event を解除せず、長寿命 object から参照され続ける。
-- event handler の中で例外が出たときの影響範囲を考えない。
-- delegate、event、interface の使い分けをせず、通知と依存差し替えを混同する。
 
 ## 関連リンク
 

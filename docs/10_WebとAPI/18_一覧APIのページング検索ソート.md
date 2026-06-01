@@ -18,6 +18,10 @@
 - 検索 keyword は `q` や `keyword` として受けます。部分一致、大文字小文字、文化圏、LIKE 検索の性能を考慮します。
 - response には items だけでなく、`page`、`pageSize`、`totalCount` などの metadata を返すと client が UI を作りやすくなります。
 - page 番号方式は扱いやすい一方、大量データやリアルタイム更新では cursor pagination も検討します。
+- 注意: `pageSize` の上限を設けず大量取得を許すと、DB や API が重くなります。
+- 注意: sort field を自由文字列のまま扱わず、許可リストで検証します。
+- 注意: 認可条件を検索条件に含め忘れると、他ユーザーのデータが見えるリスクがあります。
+- 注意: `totalCount` の有無、page 番号が 0 始まりか 1 始まりかを仕様として決めます。
 
 ## Request と Response の型
 
@@ -74,21 +78,11 @@ public interface IProductQueryService
 }
 ```
 
-## コードの読み方
-
 `[AsParameters]` は query string を `ProductListQuery` に bind します。`Math.Clamp` で `pageSize` を `1` から `100` に制限し、API 利用者が極端に大きい件数を要求できないようにしています。`sort` は許可した項目だけを受け付け、実際の検索処理は `IProductQueryService` に委ねています。
 
 ## 実務での使い方
 
 一覧 API は画面表示、CSV 出力、外部連携で頻繁に使われます。仕様として、既定の sort、最大 page size、total count の有無、検索対象、権限による絞り込みを明確にします。EF Core を使う場合は、`Skip` / `Take` の前に `OrderBy` を指定し、必要な列だけを DTO に projection します。
-
-## よくあるミス
-
-- `pageSize` の上限を設けず、大量取得を許してしまう。
-- sort field を自由文字列のまま扱う。
-- `totalCount` が必要な画面なのに response に含めない。
-- page 番号が 0 始まりか 1 始まりかを決めない。
-- 認可条件を検索条件に含め忘れ、他ユーザーのデータが見える。
 
 ## 関連リンク
 

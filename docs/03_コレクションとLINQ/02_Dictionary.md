@@ -11,6 +11,9 @@
 - 存在しないキーを `dict[key]` で直接参照すると例外になります。存在しない可能性がある検索では `TryGetValue` を優先します。
 - 文字列キーでは大文字小文字の扱いを決めます。`StringComparer.OrdinalIgnoreCase` などを constructor に渡すと、意図した比較ルールで key を扱えます。
 - 一覧を何度も検索する場合、毎回 `FirstOrDefault` で探すより、先に `ToDictionary` で lookup 用 Dictionary を作る方が読みやすく速いことがあります。
+- 注意: `dict[key]` で存在しないキーを参照する。
+- 注意: 大文字小文字の扱いを決めずに文字列キーを使う。
+- 注意: Dictionary に業務ルールを隠しすぎて、意図が読みにくくなる。
 
 ## コード例
 
@@ -61,21 +64,11 @@ var namesByCode = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCas
 Console.WriteLine(namesByCode["p-001"]); // Keyboard
 ```
 
-## コードの読み方
-
-このコード例は「Dictionary」の基本形を確認するためのものです。上から順に、値や object を用意し、C# の構文や .NET API を使い、最後に結果を確認します。まず入力、処理、出力の 3 つに分けて読むと、初学者でも流れを追いやすくなります。
-
 ## 実務での使い方
 
 コード値から名称を引く、ID からオブジェクトを探す、集計途中の値を保持する、といった場面で使います。キーの存在チェックには `TryGetValue` を優先します。
 
 `Join` と Dictionary lookup の判断は [SelectMany と Join](08_SelectManyとJoin.md) と合わせて確認します。取得系 LINQ との違いは [取得系 LINQ の使い分け](15_取得系LINQの使い分け.md) で扱います。
-
-## よくあるミス
-
-- `dict[key]` で存在しないキーを参照する。
-- 大文字小文字の扱いを決めずに文字列キーを使う。
-- Dictionary に業務ルールを隠しすぎて、意図が読みにくくなる。
 
 ## 関連リンク
 

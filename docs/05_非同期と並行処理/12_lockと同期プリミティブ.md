@@ -14,6 +14,10 @@
 - `lock` は同時に 1 つの処理だけを critical section に入れます。
 - `Interlocked` は単純な数値更新を atomic に行えます。
 - `SemaphoreSlim` は同時実行数を制限できます。
+- 注意: `lock` 対象に public object や string を使う。
+- 注意: lock 範囲を広げすぎて性能や deadlock の原因にする。
+- 注意: `lock` 内で `await` しようとする。
+- 注意: thread-safe ではない collection を複数 thread から更新する。
 
 ## コード例
 
@@ -40,20 +44,11 @@ private static int count;
 Interlocked.Increment(ref count);
 ```
 
-## コードの読み方
-
 `lock` の中は同時に 1 thread だけが実行します。`count++` は読み取り、加算、書き込みの複合操作なので、共有状態では保護が必要です。単純な増減なら `Interlocked` も使えます。
 
 ## 実務での使い方
 
 まず共有状態をなくす設計を検討します。どうしても共有する場合に、`lock` や thread-safe collection を使います。非同期 method の中で `lock` と `await` を混ぜないように注意します。
-
-## よくあるミス
-
-- `lock` 対象に public object や string を使う。
-- lock 範囲を広げすぎて性能や deadlock の原因にする。
-- `lock` 内で `await` しようとする。
-- thread-safe ではない collection を複数 thread から更新する。
 
 ## 関連リンク
 

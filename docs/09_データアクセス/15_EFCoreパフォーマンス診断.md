@@ -18,6 +18,10 @@ EF Core の処理が遅いときに、SQL、件数、index、tracking、projecti
 - 更新しない検索では `AsNoTracking()` を使い、Change Tracker の負荷を下げます。
 - N+1、過剰な `Include`、client evaluation、index 不足、不要な sort がよくある原因です。
 - 最後は DB 側の実行計画と index を確認します。C# 側だけで判断しません。
+- 注意: `Include` を増やせば安全という発想は、巨大 SQL や N+1 とは別の性能問題につながります。
+- 注意: API の一覧で全件取得してから C# 側で page 化せず、DB 側で `Where`、`OrderBy`、`Skip` / `Take` を適用します。
+- 注意: `AsNoTracking()` は読み取り用です。更新処理に付けると変更が保存されない原因になります。
+- 注意: SQL を見ずに LINQ の見た目だけで性能を判断しないようにします。
 
 ## 調査の順番
 
@@ -71,21 +75,11 @@ var products = await dbContext.Products
 
 一覧画面で `Reviews` の本文や全件が不要なら、`Include` は過剰です。必要な件数、列、関連だけに絞ります。
 
-## コードの読み方
-
 `ToQueryString()` は DB に送る SQL を確認するための調査用 API です。`AsNoTracking()` は entity の変更追跡をしないため、読み取り専用の一覧や詳細表示で効果があります。`Select` で `ProductListItem` に変換しているのは、画面や API response に必要な列だけを取得するためです。`Take(50)` は無制限取得を避けるための上限です。
 
 ## 実務での使い方
 
 PR で query を変更したら、生成 SQL、想定件数、index の有無を確認します。遅い query を見つけたら、いきなり cache を入れるのではなく、まず SQL と実行計画を見ます。`AsNoTracking()`、projection、pagination、index、N+1 解消の順に確認すると、原因を切り分けやすいです。
-
-## よくあるミス
-
-- `Include` を増やせば安全だと思い、巨大な SQL にする。
-- API の一覧で全件取得してから C# 側で page 化する。
-- `AsNoTracking()` を更新処理にも付けて、変更が保存されない原因にする。
-- `ToListAsync()` の前に `Where` や `Take` を書かず、メモリ上で絞り込む。
-- SQL を見ずに LINQ の見た目だけで性能を判断する。
 
 ## 関連リンク
 

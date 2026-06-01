@@ -54,21 +54,10 @@ public class DatabaseFixture : IAsyncLifetime
 
 この例は xUnit v2 の `IAsyncLifetime` 形式です。xUnit v3 や `Testcontainers.XunitV3` を使う場合は、公式の base class や `ValueTask` ベースの lifecycle も確認します。container image は `latest` ではなく `postgres:16` のように major version を固定します。
 
-## コードの読み方
-
-このコード例は「Testcontainers」の基本形を確認するためのものです。上から順に、値や object を用意し、C# の構文や .NET API を使い、最後に結果を確認します。まず入力、処理、出力の 3 つに分けて読むと、初学者でも流れを追いやすくなります。
 
 ## 実務での使い方
 
 EF Core の migration、SQL の互換性、トランザクション、unique 制約、N+1 調査などで使います。CI で Docker が使えるか、実行時間が許容できるかを確認します。
-
-## よくあるミス
-
-- unit test と同じ頻度で重い integration test をすべて実行する。
-- テストデータの初期化や後片付けが曖昧。
-- ローカルでは動くが CI の Docker 環境で失敗する。
-- コンテナ起動失敗時のログを確認しない。
-- `latest` tag を使い、ある日突然 DB image の挙動が変わる。
 
 ## レビュー観点
 
@@ -76,6 +65,12 @@ EF Core の migration、SQL の互換性、トランザクション、unique 制
 - テストデータは各テストで独立しているか。
 - migration を含めて検証しているか。
 - CI で実行可能な時間と環境か。
+
+- 注意: unit test と同じ頻度で重い integration test をすべて実行する。
+- 注意: テストデータの初期化や後片付けが曖昧。
+- 注意: ローカルでは動くが CI の Docker 環境で失敗する。
+- 注意: コンテナ起動失敗時のログを確認しない。
+- 注意: `latest` tag を使い、ある日突然 DB image の挙動が変わる。
 
 ## 関連リンク
 

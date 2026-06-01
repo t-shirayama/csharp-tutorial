@@ -17,6 +17,10 @@
 - `using` declaration は宣言したスコープの終わりで解放します。短い処理では読みやすいですが、解放タイミングが広くなりすぎないように注意します。
 - `File.ReadAllText` や `File.WriteAllText` のように、内部で開閉まで行う便利 API もあります。小さなファイルを一括で読むだけなら、まずは標準の簡単な API から使います。
 - 実務では、`HttpClient`、DB connection、stream、transaction などの寿命管理が重要です。基礎段階では、`IDisposable` を見たら using を検討する、と覚えます。
+- 注意: `IDisposable` な object を作ったまま解放しない。
+- 注意: `using` declaration のスコープが広すぎて、想定より長くファイルを開いたままにする。
+- 注意: 小さなファイル処理で stream を手書きしすぎて、かえって複雑にする。
+- 注意: `finally` で手動解放するコードを書き、null check や例外時の扱いを漏らす。
 
 ## using statement
 
@@ -57,20 +61,11 @@ var content = File.ReadAllText(path);
 Console.WriteLine(content);
 ```
 
-## コードの読み方
-
 `using (var writer = new StreamWriter(path))` は、ファイルを書き込むための writer を作り、ブロックを抜けるときに閉じる、という意味です。`writer.WriteLine` の途中で例外が起きても、writer の後片付けは行われます。ファイルを閉じ忘れると、他の処理が同じファイルを開けなくなることがあります。
 
 ## 実務での使い方
 
 ファイル処理、DB 処理、外部 API 通信、圧縮、暗号化などで resource 管理が出てきます。`using` は例外処理とセットで考える基礎です。業務ロジックでは、resource の寿命を短くし、必要な範囲だけ開いてすぐ閉じる設計にします。
-
-## よくあるミス
-
-- `IDisposable` な object を作ったまま解放しない。
-- `using` declaration のスコープが広すぎて、想定より長くファイルを開いたままにする。
-- 小さなファイル処理で stream を手書きしすぎて、かえって複雑にする。
-- `finally` で手動解放するコードを書き、null check や例外時の扱いを漏らす。
 
 ## 関連リンク
 

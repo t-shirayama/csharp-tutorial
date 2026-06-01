@@ -19,6 +19,9 @@ Web API でよく作る CRUD endpoint を、DTO、validation、service、status 
 - 入力値の形式チェックは endpoint 近くで行い、在庫や重複などの業務ルールは service や domain 側で扱います。
 - 作成成功は `201 Created`、取得なしは `404 Not Found`、更新成功は `200 OK` または `204 No Content`、削除成功は `204 No Content` がよく使われます。
 - endpoint に業務処理を詰め込みすぎると、validation、ログ、認証認可、テストが難しくなります。endpoint は HTTP と application service の橋渡しに寄せます。
+- 注意: `POST` 成功時に常に `200 OK` を返すと、作成された resource の場所を API 利用者が判断しにくくなります。
+- 注意: Entity をそのまま response にすると、内部 property や循環参照を公開する可能性があります。
+- 注意: `404`、`400`、`409` などの使い分け、削除済み resource の扱いを endpoint 間で揃えます。
 
 ## DTO を定義する
 
@@ -108,21 +111,11 @@ public interface IProductService
 }
 ```
 
-## コードの読み方
-
 `MapGroup("/products")` は product resource の endpoint をまとめています。`MapGet("/{id:int}")` は route parameter を `int` に制限し、存在しない場合は `404 Not Found` を返します。`MapPost` は入力検証後に service を呼び、作成された resource の URL を `Created` で返します。endpoint は HTTP の入出力を扱い、保存や業務判断は `IProductService` に委ねています。
 
 ## 実務での使い方
 
 CRUD は単純に見えますが、status code、validation、権限、同時更新、重複、削除方式などの判断が入ります。最初に endpoint の方針を揃えると、API 利用者にも開発者にも読みやすくなります。永続化が EF Core になる場合も、endpoint から直接 `DbContext` 操作を広げすぎず、責務の境界を意識します。
-
-## よくあるミス
-
-- `POST` 成功時に常に `200 OK` を返し、作成された resource の場所が分からない。
-- Entity をそのまま response にして、内部 property や循環参照を公開する。
-- `404`、`400`、`409` などの使い分けが endpoint ごとにばらつく。
-- endpoint の中に validation、DB 操作、業務ルール、ログをすべて詰め込む。
-- 削除済み resource への再削除をどう扱うか決めていない。
 
 ## 関連リンク
 

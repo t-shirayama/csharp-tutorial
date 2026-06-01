@@ -17,6 +17,9 @@ ASP.NET Core アプリから外部 API を呼ぶときの責務分割、typed cl
 - 外部 API の response をそのまま内部 model にしない方が安全です。
 - `EnsureSuccessStatusCode` だけに頼ると、status code ごとの扱いを設計しにくい場合があります。`404`、`429`、`5xx`、timeout をどう扱うか決めます。
 - retry は万能ではありません。冪等な操作か、相手 API の rate limit、二重登録の可能性を確認します。
+- 注意: `new HttpClient()` を各所で直接作らず、`IHttpClientFactory` や typed client を使います。
+- 注意: API key や token をコードやログに出さず、user secrets や環境変数から渡します。
+- 注意: non-success status をすべて同じ扱いにすると、retry 可否や利用者への返し方を判断しにくくなります。
 
 ## 構成例
 
@@ -114,8 +117,6 @@ builder.Services.AddHttpClient<WeatherApiClient>((serviceProvider, client) =>
 
 API key は `appsettings.json` に直書きせず、user secrets や環境変数で渡します。
 
-## コードの読み方
-
 `WeatherApiClient` は外部 API 呼び出しの詳細を隠す class です。`HttpRequestMessage` に API key header を付け、`SendAsync` で呼び出します。`404` は「天気情報なし」として `null` を返し、それ以外の失敗 status はログを出して例外にしています。
 
 最後に外部 DTO の `WeatherResponse` から内部向けの `WeatherSummary` へ変換しています。外部 API の response DTO を domain model として使い回さないことで、外部仕様変更の影響を閉じ込めやすくなります。
@@ -125,15 +126,6 @@ API key は `appsettings.json` に直書きせず、user secrets や環境変数
 外部 API 障害は自アプリの障害として見えます。失敗時の fallback、利用者に返す status、監視アラート、retry 可能性を事前に決めます。
 
 timeout、retry、rate limit、監視、ログ、fallback、secret 管理を最初から設計します。API key や token をログに出さないようにし、request / response body に個人情報が含まれる場合は記録範囲を制限します。
-
-## よくあるミス
-
-- `new HttpClient()` を各所で直接作る。
-- API key をコードに直書きする。
-- timeout なしで待ち続ける。
-- 外部 API の DTO を domain model として使い回す。
-- non-success status を成功扱いする。
-- non-success status をすべて同じ例外にして、retry 可否や利用者への返し方を判断できない。
 
 ## 関連リンク
 

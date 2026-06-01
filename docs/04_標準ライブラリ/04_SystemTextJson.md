@@ -7,9 +7,16 @@
 ## 要点
 
 - `JsonSerializer.Serialize` でオブジェクトを JSON にします。
+- 注意: deseriali
+ze 結果が null になる可能性を無視する。
 - `JsonSerializer.Deserialize<T>` で JSON をオブジェクトに戻します。
 - C# は PascalCase、JSON は camelCase がよく使われます。プロパティ名、null、日時、enum の表現は `JsonSerializerOptions` や属性で制御します。
 - API の JSON property 名は利用者との契約です。追加は比較的安全ですが、削除、名前変更、型変更は破壊的変更になりやすいです。
+- 注意: deserialize 結果が null になる可能性を無視する。
+- 注意: C# のプロパティ名変更が JSON 契約を壊すことに気づかない。
+- 注意: null と未指定の違いを考えない。
+- 注意: 日時や enum の表現を決めずに API を公開する。
+- 注意: enum を数値で返して意味が伝わらない。
 
 ## コード例
 
@@ -40,8 +47,6 @@ public record Product(
     decimal Price);
 ```
 
-## コードの読み方
-
 `JsonSerializerOptions` は JSON の出力形式を決める設定です。`PropertyNamingPolicy` を camelCase にすると、`DisplayName` は JSON では `displayName` になります。
 
 `JsonPropertyName` は C# 側の名前とは別に JSON 上の名前を固定します。公開 API では property 名が client の実装に使われるため、名前を変えると互換性に影響します。
@@ -53,14 +58,6 @@ public record Product(
 API のリクエスト/レスポンス、設定ファイル、外部サービス連携で使います。公開 API では JSON 形式が契約になるため、名前、null の扱い、日付形式、enum の表現をチームで揃えます。
 
 互換性を守るには、DTO の property 名を安易に変更しない、削除や型変更を破壊的変更として扱う、必要に応じて `JsonPropertyName` で wire format を固定する、という判断が必要です。
-
-## よくあるミス
-
-- deserialize 結果が null になる可能性を無視する。
-- C# のプロパティ名変更が JSON 契約を壊すことに気づかない。
-- null と未指定の違いを考えない。
-- 日時や enum の表現を決めずに API を公開する。
-- enum を数値で返して意味が伝わらない。
 
 ## 関連リンク
 

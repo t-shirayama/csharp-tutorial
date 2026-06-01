@@ -11,6 +11,12 @@
 - JWT、Cookie、OAuth/OIDC など方式があります。
 - SPA / mobile / 外部公開 API は JWT、ブラウザ中心の server-rendered app は Cookie、企業 ID 連携は OIDC / Entra ID などを検討します。
 
+- 注意: 認証済みならすべて操作可能にする。
+- 注意: JWT の検証設定を曖昧にする。
+- 注意: 権限チェックを UI だけに置く。
+- 注意: `UseAuthentication` と `UseAuthorization` の順番を逆にする。
+- 注意: token の有効期限や失効を設計しない。
+
 ## コード例
 
 ```csharp
@@ -18,10 +24,6 @@
 app.MapGet("/me", (ClaimsPrincipal user) => user.Identity?.Name)
     .RequireAuthorization();
 ```
-
-## コードの読み方
-
-このコード例は「Authentication / Authorization」の基本形を確認するためのものです。上から順に、値や object を用意し、C# の構文や .NET API を使い、最後に結果を確認します。まず入力、処理、出力の 3 つに分けて読むと、初学者でも流れを追いやすくなります。
 
 ## 方式の選び方
 
@@ -59,13 +61,6 @@ app.UseAuthorization();
 
 実務では、token を発行する側と検証する API 側の責務を分けます。API は署名、有効期限、issuer、audience を検証し、必要な claim だけを業務処理に渡します。refresh token は漏えい時の影響が大きいため、保存場所と失効方法を設計します。
 
-## よくあるミス
-
-- 認証済みならすべて操作可能にする。
-- JWT の検証設定を曖昧にする。
-- 権限チェックを UI だけに置く。
-- `UseAuthentication` と `UseAuthorization` の順番を逆にする。
-- token の有効期限や失効を設計しない。
 
 ## 関連リンク
 

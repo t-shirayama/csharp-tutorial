@@ -14,6 +14,9 @@
 - `DateTimeOffset.UtcNow` を直接呼ぶとテスト時に時刻を固定しにくいです。
 - `TimeProvider` を DI で渡すと、時刻取得を差し替えられます。
 - .NET 8 以降では `TimeProvider.System` が利用できます。
+- 注意: `DateTime.Now` と UTC を混在させる。
+- 注意: テストで現在時刻に依存し、日付が変わると落ちる。
+- 注意: 時刻取得を service の奥深くに散らばらせる。
 
 ## コード例
 
@@ -35,8 +38,6 @@ public class CouponService
 }
 ```
 
-## コードの読み方
-
 `CouponService` は現在時刻を `DateTimeOffset.UtcNow` から直接取得していません。`TimeProvider` を constructor で受け取ることで、通常実行時は `TimeProvider.System`、テスト時は固定時刻を返す provider に差し替えられます。
 
 ## DI 登録例
@@ -49,12 +50,6 @@ builder.Services.AddSingleton(TimeProvider.System);
 ## 実務での使い方
 
 期限切れ、予約、課金締め、リトライ待ち、キャッシュ期限などで使います。時刻を直接呼ぶ範囲を狭めると、テストと障害調査が楽になります。
-
-## よくあるミス
-
-- `DateTime.Now` と UTC を混在させる。
-- テストで現在時刻に依存し、日付が変わると落ちる。
-- 時刻取得を service の奥深くに散らばらせる。
 
 ## 関連リンク
 

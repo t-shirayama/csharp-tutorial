@@ -18,6 +18,9 @@ ASP.NET Core の Web API を HTTP 経由でテストし、status code と respon
 - DB、認証、外部 API はテスト用に差し替えることがあります。production の DB や外部 API を直接叩く test は不安定で危険です。
 - test では status code だけでなく、response body、header、`ProblemDetails` の内容も確認します。
 - 認証が必要な API では、test 用 authentication handler を使うか、token 発行を含む test 方針を決めます。
+- 注意: production DB や外部 API を統合テストから直接呼ばないようにします。
+- 注意: 認証認可を test で無効化したままにせず、保護されていることも確認します。
+- 注意: test data の初期化と後片付けを決め、unit test と integration test の責務を分けます。
 
 ## package を追加する
 
@@ -93,21 +96,11 @@ public sealed class CustomWebApplicationFactory : WebApplicationFactory<Program>
 }
 ```
 
-## コードの読み方
-
 `WebApplicationFactory<Program>` は API を test server として起動します。`factory.CreateClient()` で取得した `HttpClient` は、実際の network ではなく test server に request を送ります。`GetProduct_ReturnsNotFound_WhenProductDoesNotExist` は存在しない ID に対して `404` を期待し、`CreateProduct_ReturnsCreated` は `POST` の結果として `201 Created` と response body を確認しています。
 
 ## 実務での使い方
 
 routing、middleware、認証認可、serialization、validation、error response は unit test だけでは漏れやすい領域です。重要な API では、正常系、validation error、認証なし、権限不足、not found、conflict を統合テストで押さえると安心です。DB を使う場合は Testcontainers や in-memory DB の採用方針を決めます。
-
-## よくあるミス
-
-- production DB や外部 API を統合テストから直接呼ぶ。
-- status code だけ確認して response body を確認しない。
-- 認証認可を test で無効化したまま、保護されていることを確認しない。
-- test data の初期化と後片付けを決めない。
-- unit test と integration test の責務を混ぜ、遅く不安定な test だけになる。
 
 ## 関連リンク
 

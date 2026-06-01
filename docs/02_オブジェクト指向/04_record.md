@@ -15,6 +15,9 @@
 - DTO、設定値、値オブジェクトのように「値そのもの」が重要な型で候補になります。
 - Entity のように ID と状態変化が重要な型では、通常 class を優先します。
 - `with` 式で一部の値だけ変えた新しい object を作れます。
+- 注意: Entity を record にして、ID や状態変化の意味を曖昧にする。
+- 注意: `with` 式が元 object を変更すると思う。
+- 注意: mutable property を増やして、record の分かりやすさを失う。
 
 ## コード例
 
@@ -32,8 +35,6 @@ var discounted = first with { Amount = 800m };
 Console.WriteLine(discounted);
 ```
 
-## コードの読み方
-
 `Money` は金額と通貨が同じなら同じ値として扱いたい型です。`record` は constructor、property、値の等価性、`ToString` などを簡潔に用意します。`with` 式は immutable な設計と相性がよく、元の `first` を壊さず別の値を作れます。
 
 ## class との使い分け
@@ -47,12 +48,6 @@ Console.WriteLine(discounted);
 ## 実務での使い方
 
 API request / response、設定値、イベントメッセージ、値オブジェクトでよく使います。EF Core の Entity に使う場合は、tracking、constructor、変更検知との相性を確認します。
-
-## よくあるミス
-
-- Entity を record にして、ID や状態変化の意味を曖昧にする。
-- `with` 式が元 object を変更すると思う。
-- mutable property を増やして、record の分かりやすさを失う。
 
 ## 関連リンク
 

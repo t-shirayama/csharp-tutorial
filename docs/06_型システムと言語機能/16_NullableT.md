@@ -15,6 +15,10 @@
 - `HasValue` で値があるか、`Value` で中身を取り出します。
 - nullable reference types は compile-time の警告で、`Nullable<T>` は値型を包む struct です。
 
+- 注意: `Value` を無条件に呼び、例外にする。
+- 注意: `0`、空文字、null の意味を混同する。
+- 注意: nullable reference types と `Nullable<T>` を同じ仕組みだと思う。
+
 ## コード例
 
 ```csharp
@@ -37,19 +41,11 @@ var actualRetryCount = retryCount ?? 3;
 Console.WriteLine(actualRetryCount);
 ```
 
-## コードの読み方
-
 `int?` は値がない状態を表せる値型です。`Value` は値がないと例外になるため、`HasValue`、pattern matching、`??` などで安全に扱います。
 
 ## 実務での使い方
 
 DB の nullable column、任意入力の数値、外部 API の未設定値で使います。`0` と `null` の意味は違うため、業務上どちらを使うべきかを明確にします。
-
-## よくあるミス
-
-- `Value` を無条件に呼び、例外にする。
-- `0`、空文字、null の意味を混同する。
-- nullable reference types と `Nullable<T>` を同じ仕組みだと思う。
 
 ## 関連リンク
 
