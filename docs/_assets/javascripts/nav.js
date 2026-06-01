@@ -1,19 +1,33 @@
 (() => {
-  const storageKey = "csharp-tutorial-nav-closed-once";
+  const getStorageKey = () => {
+    const currentPath = location.pathname.replace(/\/$/, "");
+    const activeTab = [...document.querySelectorAll(".md-tabs__link")]
+      .map((link) => ({
+        path: new URL(link.href).pathname.replace(/\/$/, ""),
+        title: link.textContent.trim(),
+      }))
+      .filter(({ path }) => currentPath === path || currentPath.startsWith(`${path}/`))
+      .sort((a, b) => b.path.length - a.path.length)[0];
+
+    return `csharp-tutorial-nav-closed-once:${activeTab?.title || location.pathname}`;
+  };
 
   const hasClosedOnThisTab = () => {
     try {
-      return sessionStorage.getItem(storageKey) === "true";
+      return sessionStorage.getItem(getStorageKey()) === "true";
     } catch {
-      return window.__csharpTutorialNavClosedOnce === true;
+      return window.__csharpTutorialNavClosedOnce?.[getStorageKey()] === true;
     }
   };
 
   const markClosedOnThisTab = () => {
     try {
-      sessionStorage.setItem(storageKey, "true");
+      sessionStorage.setItem(getStorageKey(), "true");
     } catch {
-      window.__csharpTutorialNavClosedOnce = true;
+      window.__csharpTutorialNavClosedOnce = {
+        ...window.__csharpTutorialNavClosedOnce,
+        [getStorageKey()]: true,
+      };
     }
   };
 
