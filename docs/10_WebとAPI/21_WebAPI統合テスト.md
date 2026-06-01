@@ -7,7 +7,7 @@ ASP.NET Core の Web API を HTTP 経由でテストし、status code と respon
 ## 前提
 
 - [CRUD API の実装パターン](15_CRUD APIの実装パターン.md) を読んでいる
-- [テストプロジェクト付き solution](../00_環境構築/09_テストプロジェクト付きsolution.md) を読んでいる
+- [プロジェクト作成と実行](../00_環境構築/03_プロジェクト作成と実行.md) を読んでいる
 - [テスト戦略](../08_テストと品質/13_テスト戦略.md) を読んでいる
 
 ## 要点
@@ -112,5 +112,5 @@ routing、middleware、認証認可、serialization、validation、error respons
 ## 関連リンク
 
 - [Integration tests in ASP.NET Core](https://learn.microsoft.com/aspnet/core/test/integration-tests)
-- [テストプロジェクト付き solution](../00_環境構築/09_テストプロジェクト付きsolution.md)
+- [プロジェクト作成と実行](../00_環境構築/03_プロジェクト作成と実行.md)
 - [Testcontainers](../08_テストと品質/10_Testcontainers.md)

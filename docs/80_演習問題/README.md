@@ -37,7 +37,8 @@
 1. console project を作成して `dotnet run` する。
 2. solution を作成して project を追加する。
 3. solution root で `dotnet build` が通ることを確認する。
-4. 失敗したコマンドとエラーメッセージをメモする。
+4. xUnit test project を追加して `dotnet test` が通ることを確認する。
+5. 既存 repository を clone した想定で、`git status`、`dotnet restore`、`dotnet build` の確認手順を書く。
 
 <a id="ex-f7f8b6eee8"></a>
 ### [SDK バージョン管理](../00_環境構築/04_SDKバージョン管理.md)
@@ -48,66 +49,6 @@
 2. `global.json` を作成する。
 3. `dotnet --version` の表示が変わるか確認する。
 4. CI で使う SDK バージョンも同じにする方針を書く。
-
-<a id="ex-2cb0ac6898"></a>
-### [初期トラブルシュート](../00_環境構築/05_初期トラブルシュート.md)
-
-#### 練習問題
-
-1. `dotnet --info` の SDK と runtime の違いを確認する。
-2. `Get-Command dotnet` の結果を読む。
-3. VS Code と外部 PowerShell で同じコマンドを実行する。
-4. トラブル報告に必要な情報を箇条書きにする。
-
-<a id="ex-24f6d50cfe"></a>
-### [Git とリポジトリ取得](../00_環境構築/07_Gitとリポジトリ取得.md)
-
-#### 練習問題
-
-1. 任意の練習 repository を clone する。
-2. `git status` で差分がないことを確認する。
-3. `dotnet restore` と `dotnet build` を実行する。
-4. 作業 branch を作成して、再度 `git status` を確認する。
-
-<a id="ex-ee61bf5045"></a>
-### [NuGet 復元とパッケージソース](../00_環境構築/08_NuGet復元とパッケージソース.md)
-
-#### 練習問題
-
-1. `dotnet restore` を実行し、成功することを確認する。
-2. `dotnet nuget list source` で package source を確認する。
-3. `dotnet nuget locals all --list` で cache の場所を確認する。
-4. package を1つ追加し、`.csproj` の差分を確認する。
-
-<a id="ex-3073232f53"></a>
-### [テストプロジェクト付き solution](../00_環境構築/09_テストプロジェクト付きsolution.md)
-
-#### 練習問題
-
-1. `SampleApp` solution を作成する。
-2. `src/` に class library、`tests/` に xUnit project を作る。
-3. test project から本体 project を参照する。
-4. 最小の計算 method と test を追加し、`dotnet test` を成功させる。
-
-<a id="ex-b59461c703"></a>
-### [VS Code デバッグ設定](../00_環境構築/10_VSCodeデバッグ設定.md)
-
-#### 練習問題
-
-1. `Program.cs` に breakpoint を置いて `F5` で止める。
-2. Variables view で変数の値を確認する。
-3. Step Over で1行ずつ進める。
-4. `dotnet build` が失敗する状態にして、debug 前に build error が出ることを確認する。
-
-<a id="ex-739942ccc9"></a>
-### [環境情報の記録テンプレート](../00_環境構築/11_環境情報の記録テンプレート.md)
-
-#### 練習問題
-
-1. 自分の環境で `dotnet --info` を実行し、SDK version を記録する。
-2. `dotnet build` が失敗した想定で、テンプレートを埋める。
-3. secret が含まれていないか確認する。
-4. VS Code terminal と外部 PowerShell で `dotnet --info` の結果を比べる。
 
 ## 基礎文法
 

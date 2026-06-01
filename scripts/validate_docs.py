@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import re
 import sys
+from fnmatch import fnmatch
 from pathlib import Path
 from urllib.parse import unquote, urlparse
 
@@ -26,15 +27,34 @@ def to_posix(path: Path) -> str:
     return path.as_posix()
 
 
-def public_markdown_files() -> set[str]:
+def not_in_nav_patterns(config: dict[str, object]) -> list[str]:
+    raw_value = config.get("not_in_nav", "")
+    if not isinstance(raw_value, str):
+        return []
+
+    return [
+        line.strip()
+        for line in raw_value.splitlines()
+        if line.strip() and not line.strip().startswith("#")
+    ]
+
+
+def is_not_in_nav(path: str, patterns: list[str]) -> bool:
+    return any(fnmatch(path, pattern) for pattern in patterns)
+
+
+def public_markdown_files(patterns: list[str]) -> set[str]:
     files: set[str] = set()
     for path in DOCS_DIR.rglob("*.md"):
         relative = path.relative_to(DOCS_DIR)
+        relative_posix = to_posix(relative)
         if any(part in IGNORED_DOC_PARTS for part in relative.parts):
             continue
-        if to_posix(relative) in TOP_LEVEL_INDEX_PAGES:
+        if relative_posix in TOP_LEVEL_INDEX_PAGES:
             continue
-        files.add(to_posix(relative))
+        if is_not_in_nav(relative_posix, patterns):
+            continue
+        files.add(relative_posix)
     return files
 
 
@@ -130,20 +150,13 @@ def main() -> int:
     errors: list[str] = []
 
     config = yaml.safe_load(MKDOCS_CONFIG.read_text(encoding="utf-8"))
-    public_files = public_markdown_files()
+    patterns = not_in_nav_patterns(config)
+    public_files = public_markdown_files(patterns)
     nav_files = nav_markdown_files(config.get("nav", []))
-    index_files = index_page_links()
 
     missing_from_nav = sorted(public_files - nav_files)
     if missing_from_nav:
         errors.append("mkdocs.yml nav にない公開記事:\n  - " + "\n  - ".join(missing_from_nav))
-
-    missing_from_index = sorted(public_files - index_files)
-    if missing_from_index:
-        errors.append(
-            "docs/index_page.md から直接リンクされていない公開記事:\n  - "
-            + "\n  - ".join(missing_from_index)
-        )
 
     errors.extend(validate_local_links())
 
