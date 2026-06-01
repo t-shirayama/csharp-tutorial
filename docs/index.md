@@ -6,17 +6,17 @@
 
 ## まず読むもの
 
-1. [roadmap.md](roadmap.md) で学習順と到達目標を確認する。
-2. [index_page.md](index_page.md) から現在の学習段階に合う記事を選ぶ。
-3. [00_環境構築/01_dotnet-sdk.md](00_環境構築/01_dotnet-sdk.md) で .NET SDK を確認する。
-4. [01_基礎文法/01_プログラム構造.md](01_基礎文法/01_プログラム構造.md) から C# の読み書きを始める。
+1. [ROADMAP](roadmap.md) で学習順と到達目標を確認する。
+2. [INDEX](index_page.md) から現在の学習段階に合う記事を選ぶ。
+3. [.NET SDK のインストールと確認](00_環境構築/01_dotnet-sdk.md) で .NET SDK を確認する。
+4. [C# のプログラム構造](01_基礎文法/01_プログラム構造.md) から C# の読み書きを始める。
 
 ## 学習方針
 
 - C# の文法だけでなく、.NET CLI、NuGet、テスト、DI、ログ、データアクセス、ASP.NET Core まで扱う。
 - コード例は Windows / PowerShell / VS Code で再現しやすい形にする。
 - わからなかったこと、エラー、調査メモは [90_逆引き](90_逆引き/README.md) に残す。
-- 新しい記事を追加したら、必ず [index_page.md](index_page.md) に追記する。
+- 新しい記事を追加したら、必ず [INDEX](index_page.md) に追記する。
 
 ## 推奨環境
 
@@ -27,4 +27,4 @@
 
 ## 記事の書き方
 
-通常の記事は [_templates/article.md](_templates/article.md)、実習記事は [_templates/practice.md](_templates/practice.md) を元に作成します。
+通常の記事は [記事テンプレート](_templates/article.md)、実習記事は [実習テンプレート](_templates/practice.md) を元に作成します。

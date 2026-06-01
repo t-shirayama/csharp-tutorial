@@ -27,4 +27,4 @@ dotnet build
 
 ## 関連
 
-- [../00_環境構築/02_vscode-csharp.md](../00_環境構築/02_vscode-csharp.md)
+- [VS Code と C# Dev Kit](../00_環境構築/02_vscode-csharp.md)

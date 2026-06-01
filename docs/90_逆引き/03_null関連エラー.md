@@ -34,5 +34,5 @@ Console.WriteLine(value.Length);
 
 ## 関連
 
-- [../06_型システムと言語機能/01_nullable-reference-types.md](../06_型システムと言語機能/01_nullable-reference-types.md)
-- [../03_コレクションとLINQ/07_nullと空コレクション.md](../03_コレクションとLINQ/07_nullと空コレクション.md)
+- [nullable reference types](../06_型システムと言語機能/01_nullable-reference-types.md)
+- [null と空コレクション](../03_コレクションとLINQ/07_nullと空コレクション.md)

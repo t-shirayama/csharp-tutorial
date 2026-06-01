@@ -4,22 +4,22 @@
 
 ## 記事
 
-- [01_classとobject.md](01_classとobject.md)
-- [02_プロパティとメソッド.md](02_プロパティとメソッド.md)
-- [03_コンストラクタ.md](03_コンストラクタ.md)
-- [04_record.md](04_record.md)
-- [05_interface.md](05_interface.md)
-- [06_継承とポリモーフィズム.md](06_継承とポリモーフィズム.md)
-- [07_カプセル化.md](07_カプセル化.md)
-- [08_値オブジェクト.md](08_値オブジェクト.md)
-- [09_責務分割.md](09_責務分割.md)
-- [10_staticとインスタンス.md](10_staticとインスタンス.md)
-- [11_struct.md](11_struct.md)
-- [12_enum.md](12_enum.md)
-- [13_delegateとevent.md](13_delegateとevent.md)
-- [14_フィールドとインデクサ.md](14_フィールドとインデクサ.md)
-- [15_演算子オーバーロード.md](15_演算子オーバーロード.md)
-- [16_partial型とネスト型.md](16_partial型とネスト型.md)
+- [class と object](01_classとobject.md)
+- [プロパティとメソッド](02_プロパティとメソッド.md)
+- [コンストラクタ](03_コンストラクタ.md)
+- [record](04_record.md)
+- [interface](05_interface.md)
+- [継承とポリモーフィズム](06_継承とポリモーフィズム.md)
+- [カプセル化](07_カプセル化.md)
+- [値オブジェクト](08_値オブジェクト.md)
+- [責務分割](09_責務分割.md)
+- [static とインスタンス](10_staticとインスタンス.md)
+- [struct](11_struct.md)
+- [enum](12_enum.md)
+- [delegate と event](13_delegateとevent.md)
+- [フィールドとインデクサ](14_フィールドとインデクサ.md)
+- [演算子オーバーロード](15_演算子オーバーロード.md)
+- [partial 型とネスト型](16_partial型とネスト型.md)
 
 ## 到達目標
 

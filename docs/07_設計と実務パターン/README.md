@@ -4,22 +4,22 @@
 
 ## 記事
 
-- [01_SOLID原則.md](01_SOLID原則.md)
-- [02_DIの考え方.md](02_DIの考え方.md)
-- [03_例外設計.md](03_例外設計.md)
-- [04_ログ設計.md](04_ログ設計.md)
-- [05_設定管理.md](05_設定管理.md)
-- [06_FactoryStrategyAdapter.md](06_FactoryStrategyAdapter.md)
-- [07_レイヤードアーキテクチャ.md](07_レイヤードアーキテクチャ.md)
-- [08_CleanArchitectureの入口.md](08_CleanArchitectureの入口.md)
-- [09_DIコンテナの実装.md](09_DIコンテナの実装.md)
-- [10_IOptionsとConfiguration.md](10_IOptionsとConfiguration.md)
-- [11_ILoggerと構造化ログ.md](11_ILoggerと構造化ログ.md)
-- [12_グローバルエラーハンドリング.md](12_グローバルエラーハンドリング.md)
-- [13_IHostedServiceとバックグラウンド処理.md](13_IHostedServiceとバックグラウンド処理.md)
-- [14_アプリケーションサービスと責務分割.md](14_アプリケーションサービスと責務分割.md)
-- [15_DTOとDomainModelの使い分け.md](15_DTOとDomainModelの使い分け.md)
-- [16_設計レビュー観点.md](16_設計レビュー観点.md)
+- [SOLID 原則](01_SOLID原則.md)
+- [DI の考え方](02_DIの考え方.md)
+- [例外設計](03_例外設計.md)
+- [ログ設計](04_ログ設計.md)
+- [設定管理](05_設定管理.md)
+- [Factory / Strategy / Adapter](06_FactoryStrategyAdapter.md)
+- [レイヤードアーキテクチャ](07_レイヤードアーキテクチャ.md)
+- [Clean Architecture の入口](08_CleanArchitectureの入口.md)
+- [DI コンテナの実装](09_DIコンテナの実装.md)
+- [IOptions と Configuration](10_IOptionsとConfiguration.md)
+- [ILogger と構造化ログ](11_ILoggerと構造化ログ.md)
+- [グローバルエラーハンドリング](12_グローバルエラーハンドリング.md)
+- [IHostedService とバックグラウンド処理](13_IHostedServiceとバックグラウンド処理.md)
+- [アプリケーションサービスと責務分割](14_アプリケーションサービスと責務分割.md)
+- [DTO と Domain Model の使い分け](15_DTOとDomainModelの使い分け.md)
+- [設計レビュー観点](16_設計レビュー観点.md)
 
 ## 到達目標
 

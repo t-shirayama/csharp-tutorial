@@ -28,4 +28,4 @@ dotnet list package
 
 ## 関連
 
-- [../11_ツールと運用/02_NuGet.md](../11_ツールと運用/02_NuGet.md)
+- [NuGet](../11_ツールと運用/02_NuGet.md)

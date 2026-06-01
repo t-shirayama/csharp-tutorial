@@ -28,6 +28,6 @@ dotnet run
 
 ## 関連リンク
 
-- [../04_標準ライブラリ/09_HttpClientFactory.md](../04_標準ライブラリ/09_HttpClientFactory.md)
-- [../05_非同期と並行処理/09_タイムアウトとリトライ.md](../05_非同期と並行処理/09_タイムアウトとリトライ.md)
-- [../10_WebとAPI/12_外部API連携.md](../10_WebとAPI/12_外部API連携.md)
+- [HttpClientFactory](../04_標準ライブラリ/09_HttpClientFactory.md)
+- [タイムアウトとリトライ](../05_非同期と並行処理/09_タイムアウトとリトライ.md)
+- [外部 API 連携](../10_WebとAPI/12_外部API連携.md)

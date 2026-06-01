@@ -4,16 +4,16 @@
 
 ## 記事
 
-- [01_console-calculator.md](01_console-calculator.md)
-- [02_todo-cli.md](02_todo-cli.md)
-- [03_家計簿集計ツール.md](03_家計簿集計ツール.md)
-- [04_csv集計ツール.md](04_csv集計ツール.md)
-- [05_todo-web-api.md](05_todo-web-api.md)
-- [06_db付きcrudアプリ.md](06_db付きcrudアプリ.md)
-- [07_認証付きメモapi.md](07_認証付きメモapi.md)
-- [08_実務ミニ案件ロードマップ.md](08_実務ミニ案件ロードマップ.md)
-- [09_PR提出チェックリスト.md](09_PR提出チェックリスト.md)
-- [10_完成度チェックリスト.md](10_完成度チェックリスト.md)
+- [コンソール電卓](01_console-calculator.md)
+- [TODO CLI](02_todo-cli.md)
+- [家計簿集計ツール](03_家計簿集計ツール.md)
+- [CSV 集計ツール](04_csv集計ツール.md)
+- [TODO Web API](05_todo-web-api.md)
+- [DB 付き CRUD アプリ](06_db付きcrudアプリ.md)
+- [認証付きメモ API](07_認証付きメモapi.md)
+- [実務ミニ案件ロードマップ](08_実務ミニ案件ロードマップ.md)
+- [PR 提出チェックリスト](09_PR提出チェックリスト.md)
+- [完成度チェックリスト](10_完成度チェックリスト.md)
 
 ## 到達目標
 

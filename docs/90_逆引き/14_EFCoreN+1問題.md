@@ -44,7 +44,7 @@ var orders = await dbContext.Orders
 
 ## 関連リンク
 
-- [../09_データアクセス/07_N+1問題.md](../09_データアクセス/07_N+1問題.md)
-- [../09_データアクセス/08_EFCoreクエリ設計.md](../09_データアクセス/08_EFCoreクエリ設計.md)
-- [../09_データアクセス/12_ChangeTrackerとLoadingStrategy.md](../09_データアクセス/12_ChangeTrackerとLoadingStrategy.md)
-- [../09_データアクセス/13_EFCore診断.md](../09_データアクセス/13_EFCore診断.md)
+- [N+1 問題](../09_データアクセス/07_N+1問題.md)
+- [EF Core クエリ設計](../09_データアクセス/08_EFCoreクエリ設計.md)
+- [Change Tracker と Loading Strategy](../09_データアクセス/12_ChangeTrackerとLoadingStrategy.md)
+- [EF Core 診断](../09_データアクセス/13_EFCore診断.md)
