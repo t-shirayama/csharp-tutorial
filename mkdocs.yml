@@ -26,7 +26,6 @@ theme:
   features:
     - navigation.footer
     - navigation.indexes
-    - navigation.sections
     - navigation.tabs
     - navigation.tabs.sticky
     - navigation.top
@@ -39,6 +38,9 @@ theme:
 
 extra_css:
   - _assets/stylesheets/extra.css
+
+extra_javascript:
+  - _assets/javascripts/nav.js
 
 extra:
     generator: false
