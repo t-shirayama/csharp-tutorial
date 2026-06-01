@@ -22,8 +22,6 @@ ASP.NET Core を使った Web アプリ、Web API 開発を扱うカテゴリで
 - [Minimal API と Controller の選び方](16_MinimalAPIとControllerの選び方.md)
 - [Status Code と ProblemDetails](17_StatusCodeとProblemDetails.md)
 - [一覧 API のページング検索ソート](18_一覧APIのページング検索ソート.md)
-- [OpenAPI を契約として整える](19_OpenAPIを契約として整える.md)
-- [外部 API Typed Client 実装](20_外部APITypedClient実装.md)
 - [Web API 統合テスト](21_WebAPI統合テスト.md)
 
 ## 到達目標

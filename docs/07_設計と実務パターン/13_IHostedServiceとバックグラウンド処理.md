@@ -8,7 +8,7 @@ ASP.NET Core や Worker Service でバックグラウンド処理を安全に実
 
 - [DI コンテナの実装](09_DIコンテナの実装.md) を読んでいる
 - [CancellationToken](../05_非同期と並行処理/03_CancellationToken.md) を読んでいる
-- [ILogger と構造化ログ](11_ILoggerと構造化ログ.md) を読んでいる
+- [ログ設計と構造化ログ](04_ログ設計.md) を読んでいる
 
 ## 要点
 

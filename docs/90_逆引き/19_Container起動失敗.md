@@ -48,4 +48,4 @@ docker run --rm -p 8080:8080 `
 
 - [Docker](../11_ツールと運用/06_Docker.md)
 - [デプロイ失敗時の診断](../11_ツールと運用/12_デプロイ失敗時の診断.md)
-- [appsettings](../11_ツールと運用/04_appsettings.md)
+- [設定管理と IOptions](../07_設計と実務パターン/10_IOptionsとConfiguration.md)

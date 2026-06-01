@@ -1,13 +1,14 @@
-# HttpClient
+# HttpClient と HttpClientFactory
 
 ## 目的
 
-外部 API へ HTTP リクエストを送る `HttpClient` の基本を理解します。
+外部 API へ HTTP リクエストを送る `HttpClient` の基本と、`IHttpClientFactory` による安全な管理方法を理解します。
 
 ## 要点
 
 - `HttpClient` は HTTP 通信を行うためのクラスです。GET や POST を送るだけでなく、header、content、status code、timeout、cancellation まで含めて扱います。
 - 実務では使い捨てではなく、DI や `IHttpClientFactory` と組み合わせます。request ごとに `new HttpClient()` すると socket 枯渇を招くことがあり、逆に長寿命 client では DNS 更新への追従も考える必要があります。
+- `IHttpClientFactory` は `HttpClient` の生成と handler lifetime を管理します。named client や typed client にすると、外部 API ごとの設定と責務を分けやすくなります。
 - タイムアウト、ステータスコード、キャンセルを考慮します。外部 API は必ず成功するとは限らないため、失敗時の retry、fallback、利用者へのエラー応答まで設計します。
 - `EnsureSuccessStatusCode()` は 2xx 以外を例外にします。便利ですが、404 や 409 のように業務上意味のある status を個別に扱いたい場合は、自分で status code を判定します。
 - request body や response body には個人情報や secret が含まれることがあります。ログへ丸ごと出すのではなく、必要な情報だけを masking して記録します。
@@ -28,13 +29,44 @@ var body = await response.Content.ReadAsStringAsync();
 Console.WriteLine(body.Length);
 ```
 
+## typed client の例
+
+```csharp
+// WeatherApiClient 用の HttpClient を DI に登録します。
+builder.Services.AddHttpClient<WeatherApiClient>(client =>
+{
+    // 外部 API の基準 URL と timeout を client ごとに設定します。
+    client.BaseAddress = new Uri("https://api.example.com");
+    client.Timeout = TimeSpan.FromSeconds(10);
+});
+
+public class WeatherApiClient
+{
+    // IHttpClientFactory が管理する HttpClient が注入されます。
+    private readonly HttpClient httpClient;
+
+    public WeatherApiClient(HttpClient httpClient)
+    {
+        this.httpClient = httpClient;
+    }
+
+    // cancellationToken を渡し、呼び出し元からキャンセルできるようにします。
+    public async Task<string> GetAsync(CancellationToken cancellationToken)
+        => await httpClient.GetStringAsync("/weather", cancellationToken);
+}
+```
+
 ## コードの読み方
 
-このコード例は「HttpClient」の基本形を確認するためのものです。上から順に、値や object を用意し、C# の構文や .NET API を使い、最後に結果を確認します。まず入力、処理、出力の 3 つに分けて読むと、初学者でも流れを追いやすくなります。
+最初のコード例は `HttpClient` の最小形です。`GetAsync` で request を送り、`EnsureSuccessStatusCode` で 2xx 以外を例外にし、body を文字列として読みます。
+
+typed client の例では、`AddHttpClient<WeatherApiClient>` が設定済みの `HttpClient` を DI に登録します。外部 API ごとの URL や timeout を client に閉じ込めることで、呼び出し側は HTTP の詳細を意識しなくて済みます。
 
 ## 実務での使い方
 
 外部 API 連携、社内サービス呼び出し、Webhook、認証サーバー連携で使います。ASP.NET Core では `IHttpClientFactory` を使って named client や typed client を定義することが多いです。
+
+外部 API ごとに typed client を作り、URL、timeout、認証 header、ログ、リトライ方針をまとめます。秘密情報は設定や secret 管理から渡します。
 
 ## よくあるミス
 
@@ -42,8 +74,11 @@ Console.WriteLine(body.Length);
 - 1つの長寿命 `HttpClient` を使う場合に DNS 変更へ追従する設定を考えない。
 - ステータスコードを見ずに本文だけ読む。
 - タイムアウトやキャンセルを設定しない。
+- API ごとの設定が `Program.cs` に散らばる。
+- 例外や non-success status の扱いを決めていない。
 
 ## 関連リンク
 
 - [HttpClient](https://learn.microsoft.com/dotnet/fundamentals/networking/http/httpclient)
 - [Guidelines for using HttpClient](https://learn.microsoft.com/dotnet/fundamentals/networking/http/httpclient-guidelines)
+- [IHttpClientFactory with .NET](https://learn.microsoft.com/dotnet/core/extensions/httpclient-factory)

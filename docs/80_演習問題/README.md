@@ -734,7 +734,7 @@
 3. `Func<string>` と `Func<object>` の代入関係を確認する。
 
 <a id="ex-21f92090c5"></a>
-### [属性の詳細](../06_型システムと言語機能/13_属性の詳細.md)
+### [attributes](../06_型システムと言語機能/05_attributes.md)
 
 #### 練習問題
 
@@ -743,7 +743,7 @@
 3. attribute ではなく DI や設定で表すべき例を考える。
 
 <a id="ex-5e2524aa15"></a>
-### [リフレクションの詳細](../06_型システムと言語機能/14_リフレクションの詳細.md)
+### [reflection](../06_型システムと言語機能/06_reflection.md)
 
 #### 練習問題
 
@@ -817,15 +817,6 @@
 3. API のエラーレスポンス方針を書く。
 
 <a id="ex-83a76338b8"></a>
-### [設定管理](../07_設計と実務パターン/05_設定管理.md)
-
-#### 練習問題
-
-1. 必須設定がない場合に起動エラーにする方針を書く。
-2. 秘密情報と非秘密情報を分類する。
-3. 環境ごとに変わる値を一覧化する。
-
-<a id="ex-a10cbde8a1"></a>
 ### [Factory / Strategy / Adapter](../07_設計と実務パターン/06_FactoryStrategyAdapter.md)
 
 #### 練習問題
@@ -863,7 +854,7 @@
 4. Singleton から Scoped に依存すると何が問題か説明する。
 
 <a id="ex-1642d432db"></a>
-### [IOptions と Configuration](../07_設計と実務パターン/10_IOptionsとConfiguration.md)
+### [設定管理と IOptions](../07_設計と実務パターン/10_IOptionsとConfiguration.md)
 
 #### 練習問題
 
@@ -871,9 +862,10 @@
 2. `TimeoutSeconds` が 0 以下なら起動時エラーにする。
 3. 環境変数で `ExternalApi__BaseUrl` を上書きする。
 4. 秘密情報にすべき設定値を分類する。
+5. 環境ごとに変わる値を一覧化する。
 
 <a id="ex-f4c99b6cf1"></a>
-### [ILogger と構造化ログ](../07_設計と実務パターン/11_ILoggerと構造化ログ.md)
+### [ログ設計と構造化ログ](../07_設計と実務パターン/04_ログ設計.md)
 
 #### 練習問題
 
@@ -1206,7 +1198,7 @@
 4. `items` と `totalCount` を含む response を返す。
 
 <a id="ex-52aa32cc02"></a>
-### [OpenAPI を契約として整える](../10_WebとAPI/19_OpenAPIを契約として整える.md)
+### [OpenAPI](../10_WebとAPI/08_OpenAPI.md)
 
 #### 練習問題
 
@@ -1216,7 +1208,7 @@
 4. Development 以外では OpenAPI endpoint を公開しない設定にする。
 
 <a id="ex-16d3f96749"></a>
-### [外部 API Typed Client 実装](../10_WebとAPI/20_外部APITypedClient実装.md)
+### [外部 API 連携](../10_WebとAPI/12_外部API連携.md)
 
 #### 練習問題
 
@@ -1327,7 +1319,7 @@
 - [Authentication / Authorization](../10_WebとAPI/07_AuthenticationAuthorization.md) と [Rate Limiting と Caching](../10_WebとAPI/14_RateLimitingとCaching.md) を読み、攻撃対策を追加する。
 
 <a id="ex-1ad0b4959f"></a>
-### [実務ミニ案件ロードマップ](../12_実践プロジェクト/08_実務ミニ案件ロードマップ.md)
+### [実務ミニ案件チェックリスト](../12_実践プロジェクト/08_実務ミニ案件チェックリスト.md)
 
 #### 発展課題
 
@@ -1335,21 +1327,9 @@
 - Docker で DB を起動する。
 - OpenAPI を更新する。
 - release note を書く。
-
-<a id="ex-d2f78784a3"></a>
-### [PR 提出チェックリスト](../12_実践プロジェクト/09_PR提出チェックリスト.md)
-
-#### 発展課題
-
 - PR template を作る。
 - review 指摘を分類して再発防止メモにする。
 - release note を PR から作る。
-
-<a id="ex-402e84fd09"></a>
-### [完成度チェックリスト](../12_実践プロジェクト/10_完成度チェックリスト.md)
-
-#### 発展課題
-
 - Docker Compose で依存サービスを起動する。
 - GitHub Actions で build/test/format を実行する。
 - OpenAPI とサンプル request を整える。

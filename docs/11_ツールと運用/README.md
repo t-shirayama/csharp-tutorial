@@ -7,7 +7,6 @@
 - [dotnet CLI](01_dotnetCLI.md)
 - [NuGet](02_NuGet.md)
 - [solution と project](03_solutionとproject.md)
-- [appsettings](04_appsettings.md)
 - [GitHub Actions](05_GitHubActions.md)
 - [Docker](06_Docker.md)
 - [release と versioning](07_releaseとversioning.md)

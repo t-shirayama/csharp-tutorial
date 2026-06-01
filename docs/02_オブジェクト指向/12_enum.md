@@ -7,7 +7,7 @@
 ## 前提
 
 - [class と object](01_classとobject.md) を読んでいる
-- [JSON 互換性と命名規則](../04_標準ライブラリ/10_JSON互換性と命名規則.md) を読んでいる
+- [System.Text.Json と JSON 契約](../04_標準ライブラリ/04_SystemTextJson.md) を読んでいる
 
 ## 要点
 

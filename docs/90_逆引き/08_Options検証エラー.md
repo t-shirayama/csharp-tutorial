@@ -27,5 +27,5 @@ $env:ExternalApi__BaseUrl
 
 ## 関連リンク
 
-- [IOptions と Configuration](../07_設計と実務パターン/10_IOptionsとConfiguration.md)
+- [設定管理と IOptions](../07_設計と実務パターン/10_IOptionsとConfiguration.md)
 - [Secret 管理](../11_ツールと運用/10_Secret管理.md)
