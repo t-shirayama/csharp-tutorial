@@ -1,5 +1,13 @@
 (() => {
+  let closedOnInitialLoad = false;
+
   const closePrimaryNavAccordions = () => {
+    if (closedOnInitialLoad) {
+      return;
+    }
+
+    closedOnInitialLoad = true;
+
     document
       .querySelectorAll(".md-sidebar--primary .md-nav__toggle")
       .forEach((toggle) => {
@@ -14,9 +22,9 @@
       });
   };
 
-  if (window.document$) {
-    window.document$.subscribe(closePrimaryNavAccordions);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", closePrimaryNavAccordions, { once: true });
   } else {
-    document.addEventListener("DOMContentLoaded", closePrimaryNavAccordions);
+    closePrimaryNavAccordions();
   }
 })();
