@@ -4,7 +4,7 @@
 
 このリポジトリは MkDocs / Material for MkDocs で静的サイト化する C# / .NET 学習チュートリアルです。
 
-公開用の記事は [docs/index.md](docs/index.md) から始まります。レビュー、ファクトチェック、アーカイブなどの管理記録は `作業/` に残し、サイトのナビゲーションには含めません。
+公開用の記事は [docs/index.md](docs/index.md) から始まります。
 
 ## 公開サイト
 
