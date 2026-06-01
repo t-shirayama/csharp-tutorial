@@ -9,6 +9,8 @@
 - `.csproj` は1つのプロジェクト定義です。
 - `.sln` は複数プロジェクトをまとめます。
 - 実務ではアプリ、ライブラリ、テストを別 project に分けます。
+- solution は依存関係そのものではなく、複数 project をまとめて操作する単位です。
+- project 同士の依存関係は `dotnet add reference` で `.csproj` に記録します。
 
 ## コマンド
 
@@ -18,6 +20,10 @@ dotnet new classlib -n Sample.Domain
 dotnet new xunit -n Sample.Tests
 dotnet sln add Sample.Domain Sample.Tests
 ```
+
+`dotnet sln add` は solution に project を登録します。これにより solution root で `dotnet build` や `dotnet test` を実行したときに、登録済み project がまとめて対象になります。
+
+一方、project A から project B の code を使うには project reference が必要です。solution に両方を追加しただけでは code を参照できないため、必要に応じて `dotnet add Sample.Tests reference Sample.Domain` のように依存関係を追加します。
 
 ## よくあるミス
 
