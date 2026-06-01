@@ -1,12 +1,28 @@
 (() => {
-  let closedOnInitialLoad = false;
+  const storageKey = "csharp-tutorial-nav-closed-once";
+
+  const hasClosedOnThisTab = () => {
+    try {
+      return sessionStorage.getItem(storageKey) === "true";
+    } catch {
+      return window.__csharpTutorialNavClosedOnce === true;
+    }
+  };
+
+  const markClosedOnThisTab = () => {
+    try {
+      sessionStorage.setItem(storageKey, "true");
+    } catch {
+      window.__csharpTutorialNavClosedOnce = true;
+    }
+  };
 
   const closePrimaryNavAccordions = () => {
-    if (closedOnInitialLoad) {
+    if (hasClosedOnThisTab()) {
       return;
     }
 
-    closedOnInitialLoad = true;
+    markClosedOnThisTab();
 
     document
       .querySelectorAll(".md-sidebar--primary .md-nav__toggle")
