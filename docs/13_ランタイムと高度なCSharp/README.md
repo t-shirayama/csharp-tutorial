@@ -1,4 +1,4 @@
-# 13_ランタイムと高度なCSharp
+# ランタイムと高度なCSharp
 
 C# と .NET runtime の深い仕組み、性能、メモリ、assembly、plugin model を扱うカテゴリです。
 
@@ -23,5 +23,5 @@ C# と .NET runtime の深い仕組み、性能、メモリ、assembly、plugin 
 
 ## 次に進むカテゴリ
 
-- [99_参考資料](../99_参考資料/README.md)
-- [90_逆引き](../90_逆引き/README.md)
+- [参考資料](../99_参考資料/README.md)
+- [逆引き](../90_逆引き/README.md)

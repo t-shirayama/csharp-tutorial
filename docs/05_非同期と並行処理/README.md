@@ -1,4 +1,4 @@
-# 05_非同期と並行処理
+# 非同期と並行処理
 
 async / await、Task、CancellationToken などを扱うカテゴリです。
 
@@ -33,5 +33,5 @@ async / await、Task、CancellationToken などを扱うカテゴリです。
 
 ## 次に進むカテゴリ
 
-- [06_型システムと言語機能](../06_型システムと言語機能/README.md)
-- [10_WebとAPI](../10_WebとAPI/README.md)
+- [型システムと言語機能](../06_型システムと言語機能/README.md)
+- [WebとAPI](../10_WebとAPI/README.md)
