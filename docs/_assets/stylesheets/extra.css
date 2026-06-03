@@ -83,6 +83,34 @@ a.md-nav__link--active:hover {
   background: rgba(0, 150, 136, 0.16);
 }
 
+.md-sidebar--primary .md-nav__link.csharp-tutorial-read-state {
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.md-sidebar--primary .md-nav__link.csharp-tutorial-read-state::before {
+  position: absolute;
+  top: 50%;
+  left: 0.4rem;
+  transform: translateY(-50%);
+  color: var(--md-default-fg-color--light);
+  font-weight: 700;
+  line-height: 1;
+  content: "\2713";
+}
+
+.md-sidebar--primary .md-nav__link.csharp-tutorial-read {
+  color: inherit;
+}
+
+.md-sidebar--primary .md-nav__link.csharp-tutorial-read::before {
+  color: var(--site-active-color);
+}
+
+.md-sidebar--primary .md-nav__link.csharp-tutorial-unread::before {
+  opacity: 0.55;
+}
+
 .md-typeset {
   line-height: 1.75;
 }

@@ -1,5 +1,6 @@
 (() => {
   const html = document.documentElement;
+  const readPagesStorageKey = "csharp-tutorial-read-pages";
 
   html.classList.add("csharp-tutorial-nav-loading");
 
@@ -46,7 +47,60 @@
     }
   };
 
+  const normalizePath = (path) => {
+    const withoutIndex = path.replace(/\/index\.html$/, "/");
+    const withoutTrailingSlash = withoutIndex.replace(/\/$/, "");
+
+    return withoutTrailingSlash || "/";
+  };
+
+  const getReadPages = () => {
+    try {
+      const value = JSON.parse(localStorage.getItem(readPagesStorageKey) || "[]");
+
+      return new Set(Array.isArray(value) ? value : []);
+    } catch {
+      return new Set(window.__csharpTutorialReadPages || []);
+    }
+  };
+
+  const saveReadPages = (readPages) => {
+    const value = [...readPages].sort();
+
+    try {
+      localStorage.setItem(readPagesStorageKey, JSON.stringify(value));
+    } catch {
+      window.__csharpTutorialReadPages = value;
+    }
+  };
+
+  const markCurrentPageAsRead = () => {
+    const readPages = getReadPages();
+
+    readPages.add(normalizePath(location.pathname));
+    saveReadPages(readPages);
+
+    return readPages;
+  };
+
+  const applyReadStateToPrimaryNav = () => {
+    const readPages = markCurrentPageAsRead();
+
+    document
+      .querySelectorAll(".md-sidebar--primary .md-nav__link[href]")
+      .forEach((link) => {
+        const path = normalizePath(new URL(link.href).pathname);
+        const hasRead = readPages.has(path);
+
+        link.classList.add("csharp-tutorial-read-state");
+        link.classList.toggle("csharp-tutorial-read", hasRead);
+        link.classList.toggle("csharp-tutorial-unread", !hasRead);
+      });
+  };
+
   const closePrimaryNavAccordions = () => {
+    applyReadStateToPrimaryNav();
+
     if (hasClosedOnThisTab()) {
       showPrimaryNav();
       return;
