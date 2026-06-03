@@ -49,6 +49,42 @@
     }
   };
 
+  const setNestedNavExpanded = (toggle, expanded) => {
+    toggle.checked = expanded;
+
+    const item = toggle.closest(".md-nav__item--nested");
+    const nav = item?.querySelector(":scope > .md-nav");
+
+    if (nav) {
+      nav.setAttribute("aria-expanded", String(expanded));
+    }
+  };
+
+  const bindNestedNavToggles = () => {
+    document
+      .querySelectorAll(".md-sidebar--primary .md-nav__item--nested > .md-nav__toggle")
+      .forEach((toggle) => {
+        const labels = document.querySelectorAll(`label[for="${toggle.id}"]`);
+
+        labels.forEach((label) => {
+          if (label.dataset.csharpTutorialToggleBound === "true") {
+            return;
+          }
+
+          label.dataset.csharpTutorialToggleBound = "true";
+          label.addEventListener("click", (event) => {
+            if (!toggle.checked) {
+              window.setTimeout(() => setNestedNavExpanded(toggle, toggle.checked), 0);
+              return;
+            }
+
+            event.preventDefault();
+            setNestedNavExpanded(toggle, false);
+          });
+        });
+      });
+  };
+
   const normalizePath = (path) => {
     const withoutIndex = path.replace(/\/index\.html$/, "/");
     const withoutTrailingSlash = withoutIndex.replace(/\/$/, "");
@@ -155,6 +191,7 @@
 
   const closePrimaryNavAccordions = () => {
     try {
+      bindNestedNavToggles();
       applyReadStateToPrimaryNav();
 
       if (hasClosedOnThisTab()) {
@@ -167,14 +204,7 @@
       document
         .querySelectorAll(".md-sidebar--primary .md-nav__toggle")
         .forEach((toggle) => {
-          toggle.checked = false;
-
-          const item = toggle.closest(".md-nav__item--nested");
-          const nav = item?.querySelector(":scope > .md-nav");
-
-          if (nav) {
-            nav.setAttribute("aria-expanded", "false");
-          }
+          setNestedNavExpanded(toggle, false);
         });
 
       showPrimaryNavAfterPaint();
