@@ -64,22 +64,22 @@
     document
       .querySelectorAll(".md-sidebar--primary .md-nav__item--nested > .md-nav__toggle")
       .forEach((toggle) => {
+        const item = toggle.closest(".md-nav__item--nested");
         const labels = document.querySelectorAll(`label[for="${toggle.id}"]`);
+        const parentLink = item?.querySelector(
+          ":scope > .md-nav__link.md-nav__container > .md-nav__link[href]",
+        );
+        const controls = [...labels, parentLink].filter(Boolean);
 
-        labels.forEach((label) => {
-          if (label.dataset.csharpTutorialToggleBound === "true") {
+        controls.forEach((control) => {
+          if (control.dataset.csharpTutorialToggleBound === "true") {
             return;
           }
 
-          label.dataset.csharpTutorialToggleBound = "true";
-          label.addEventListener("click", (event) => {
-            if (!toggle.checked) {
-              window.setTimeout(() => setNestedNavExpanded(toggle, toggle.checked), 0);
-              return;
-            }
-
+          control.dataset.csharpTutorialToggleBound = "true";
+          control.addEventListener("click", (event) => {
             event.preventDefault();
-            setNestedNavExpanded(toggle, false);
+            setNestedNavExpanded(toggle, !toggle.checked);
           });
         });
       });
