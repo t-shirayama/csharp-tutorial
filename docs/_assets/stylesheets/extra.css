@@ -34,15 +34,15 @@
   border-right: 1px solid var(--md-default-fg-color--lightest);
 }
 
-:root:not(.csharp-tutorial-nav-ready) .md-sidebar--primary .md-sidebar__scrollwrap {
+:root.csharp-tutorial-nav-loading .md-sidebar--primary .md-sidebar__scrollwrap {
   position: relative;
 }
 
-:root:not(.csharp-tutorial-nav-ready) .md-sidebar--primary .md-nav {
+:root.csharp-tutorial-nav-loading .md-sidebar--primary .md-nav {
   visibility: hidden;
 }
 
-:root:not(.csharp-tutorial-nav-ready) .md-sidebar--primary .md-sidebar__scrollwrap::before {
+:root.csharp-tutorial-nav-loading .md-sidebar--primary .md-sidebar__scrollwrap::before {
   position: absolute;
   top: 1rem;
   left: 50%;

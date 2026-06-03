@@ -9,6 +9,8 @@
     html.classList.add("csharp-tutorial-nav-ready");
   };
 
+  const loadingFallback = window.setTimeout(showPrimaryNav, 1200);
+
   const showPrimaryNavAfterPaint = () => {
     requestAnimationFrame(() => {
       requestAnimationFrame(showPrimaryNav);
@@ -122,7 +124,7 @@
       updateReadState(link, button, !hasRead);
     });
 
-    item.insertBefore(button, link);
+    item.insertBefore(button, item.firstChild);
 
     return button;
   };
@@ -144,29 +146,35 @@
   };
 
   const closePrimaryNavAccordions = () => {
-    applyReadStateToPrimaryNav();
+    try {
+      applyReadStateToPrimaryNav();
 
-    if (hasClosedOnThisTab()) {
+      if (hasClosedOnThisTab()) {
+        showPrimaryNav();
+        return;
+      }
+
+      markClosedOnThisTab();
+
+      document
+        .querySelectorAll(".md-sidebar--primary .md-nav__toggle")
+        .forEach((toggle) => {
+          toggle.checked = false;
+
+          const item = toggle.closest(".md-nav__item--nested");
+          const nav = item?.querySelector(":scope > .md-nav");
+
+          if (nav) {
+            nav.setAttribute("aria-expanded", "false");
+          }
+        });
+
+      showPrimaryNavAfterPaint();
+    } catch {
       showPrimaryNav();
-      return;
+    } finally {
+      window.clearTimeout(loadingFallback);
     }
-
-    markClosedOnThisTab();
-
-    document
-      .querySelectorAll(".md-sidebar--primary .md-nav__toggle")
-      .forEach((toggle) => {
-        toggle.checked = false;
-
-        const item = toggle.closest(".md-nav__item--nested");
-        const nav = item?.querySelector(":scope > .md-nav");
-
-        if (nav) {
-          nav.setAttribute("aria-expanded", "false");
-        }
-      });
-
-    showPrimaryNavAfterPaint();
   };
 
   if (document.readyState === "loading") {
