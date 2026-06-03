@@ -1,4 +1,19 @@
 (() => {
+  const html = document.documentElement;
+
+  html.classList.add("csharp-tutorial-nav-loading");
+
+  const showPrimaryNav = () => {
+    html.classList.remove("csharp-tutorial-nav-loading");
+    html.classList.add("csharp-tutorial-nav-ready");
+  };
+
+  const showPrimaryNavAfterPaint = () => {
+    requestAnimationFrame(() => {
+      requestAnimationFrame(showPrimaryNav);
+    });
+  };
+
   const getStorageKey = () => {
     const currentPath = location.pathname.replace(/\/$/, "");
     const activeTab = [...document.querySelectorAll(".md-tabs__link")]
@@ -33,6 +48,7 @@
 
   const closePrimaryNavAccordions = () => {
     if (hasClosedOnThisTab()) {
+      showPrimaryNav();
       return;
     }
 
@@ -50,6 +66,8 @@
           nav.setAttribute("aria-expanded", "false");
         }
       });
+
+    showPrimaryNavAfterPaint();
   };
 
   if (document.readyState === "loading") {

@@ -34,6 +34,34 @@
   border-right: 1px solid var(--md-default-fg-color--lightest);
 }
 
+:root:not(.csharp-tutorial-nav-ready) .md-sidebar--primary .md-sidebar__scrollwrap {
+  position: relative;
+}
+
+:root:not(.csharp-tutorial-nav-ready) .md-sidebar--primary .md-nav {
+  visibility: hidden;
+}
+
+:root:not(.csharp-tutorial-nav-ready) .md-sidebar--primary .md-sidebar__scrollwrap::before {
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  width: 1.15rem;
+  height: 1.15rem;
+  margin-left: -0.575rem;
+  border: 2px solid var(--md-default-fg-color--lightest);
+  border-top-color: var(--site-active-color);
+  border-radius: 50%;
+  animation: csharp-tutorial-nav-spinner 0.75s linear infinite;
+  content: "";
+}
+
+@keyframes csharp-tutorial-nav-spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .md-sidebar--secondary .md-sidebar__scrollwrap {
   border-left: 1px solid var(--md-default-fg-color--lightest);
 }
