@@ -74,27 +74,72 @@
     }
   };
 
-  const markCurrentPageAsRead = () => {
-    const readPages = getReadPages();
+  const updateReadState = (link, button, hasRead) => {
+    link.classList.add("csharp-tutorial-read-state");
+    link.classList.toggle("csharp-tutorial-read", hasRead);
+    link.classList.toggle("csharp-tutorial-unread", !hasRead);
 
-    readPages.add(normalizePath(location.pathname));
-    saveReadPages(readPages);
+    button.classList.toggle("csharp-tutorial-read-toggle--read", hasRead);
+    button.classList.toggle("csharp-tutorial-read-toggle--unread", !hasRead);
+    button.setAttribute("aria-pressed", String(hasRead));
+    button.setAttribute("aria-label", hasRead ? "未読に戻す" : "読了にする");
+    button.title = hasRead ? "未読に戻す" : "読了にする";
+  };
 
-    return readPages;
+  const createReadToggle = (link, path) => {
+    const item = link.closest(".md-nav__item");
+    const existingButton = item?.querySelector(":scope > .csharp-tutorial-read-toggle");
+
+    if (!item) {
+      return null;
+    }
+
+    item.classList.add("csharp-tutorial-read-item");
+
+    if (existingButton) {
+      return existingButton;
+    }
+
+    const button = document.createElement("button");
+
+    button.className = "csharp-tutorial-read-toggle";
+    button.type = "button";
+    button.textContent = "✓";
+    button.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      const readPages = getReadPages();
+      const hasRead = readPages.has(path);
+
+      if (hasRead) {
+        readPages.delete(path);
+      } else {
+        readPages.add(path);
+      }
+
+      saveReadPages(readPages);
+      updateReadState(link, button, !hasRead);
+    });
+
+    item.insertBefore(button, link);
+
+    return button;
   };
 
   const applyReadStateToPrimaryNav = () => {
-    const readPages = markCurrentPageAsRead();
+    const readPages = getReadPages();
 
     document
       .querySelectorAll(".md-sidebar--primary .md-nav__link[href]")
       .forEach((link) => {
         const path = normalizePath(new URL(link.href).pathname);
         const hasRead = readPages.has(path);
+        const button = createReadToggle(link, path);
 
-        link.classList.add("csharp-tutorial-read-state");
-        link.classList.toggle("csharp-tutorial-read", hasRead);
-        link.classList.toggle("csharp-tutorial-unread", !hasRead);
+        if (button) {
+          updateReadState(link, button, hasRead);
+        }
       });
   };
 
