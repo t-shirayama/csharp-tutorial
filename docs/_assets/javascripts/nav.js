@@ -124,7 +124,7 @@
       updateReadState(link, button, !hasRead);
     });
 
-    item.insertBefore(button, item.firstChild);
+    item.insertBefore(button, link);
 
     return button;
   };
@@ -133,9 +133,17 @@
     const readPages = getReadPages();
 
     document
-      .querySelectorAll(".md-sidebar--primary .md-nav__link[href]")
+      .querySelectorAll(
+        ".md-sidebar--primary .md-nav__item:not(.md-nav__item--nested) > .md-nav__link[href]",
+      )
       .forEach((link) => {
-        const path = normalizePath(new URL(link.href).pathname);
+        const url = new URL(link.href);
+
+        if (url.hash) {
+          return;
+        }
+
+        const path = normalizePath(url.pathname);
         const hasRead = readPages.has(path);
         const button = createReadToggle(link, path);
 

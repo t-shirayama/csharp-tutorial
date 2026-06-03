@@ -101,9 +101,9 @@ a.md-nav__link--active:hover {
   height: 1.15rem;
   padding: 0;
   transform: translateY(-50%);
-  border: 0;
+  border: 1px solid var(--md-default-fg-color--lighter);
   border-radius: 50%;
-  background: transparent;
+  background: var(--md-default-bg-color);
   color: var(--md-default-fg-color--light);
   cursor: pointer;
   font: inherit;
@@ -116,10 +116,13 @@ a.md-nav__link--active:hover {
 .md-sidebar--primary .csharp-tutorial-read-toggle:hover,
 .md-sidebar--primary .csharp-tutorial-read-toggle:focus-visible {
   background: rgba(0, 150, 136, 0.1);
+  border-color: var(--site-active-color);
   outline: none;
 }
 
 .md-sidebar--primary .csharp-tutorial-read-toggle--read {
+  border-color: var(--site-active-color);
+  background: rgba(0, 150, 136, 0.12);
   color: var(--site-active-color);
 }
 
