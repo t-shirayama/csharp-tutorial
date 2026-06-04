@@ -42,7 +42,9 @@
   visibility: hidden;
 }
 
-:root.csharp-tutorial-nav-loading .md-sidebar--primary .md-sidebar__scrollwrap::before {
+:root.csharp-tutorial-nav-loading
+  .md-sidebar--primary
+  .md-sidebar__scrollwrap::before {
   position: absolute;
   top: 1rem;
   left: 50%;
@@ -166,14 +168,16 @@ a.md-nav__link--active:hover {
 }
 
 .md-typeset code {
-  font-family: "Cascadia Code", "JetBrains Mono", Consolas, "Courier New", monospace;
+  font-family:
+    "Cascadia Code", "JetBrains Mono", Consolas, "Courier New", monospace;
   border-radius: 0.25rem;
   font-size: 0.78em;
 }
 
 .md-typeset pre > code {
   padding: 0.8rem 0.9rem;
-  font-family: "Cascadia Code", "JetBrains Mono", Consolas, "Courier New", monospace;
+  font-family:
+    "Cascadia Code", "JetBrains Mono", Consolas, "Courier New", monospace;
   font-size: 0.72rem;
   line-height: 1.55;
 }
@@ -322,4 +326,9 @@ a.md-nav__link--active:hover {
 
 .md-footer-meta {
   display: none;
+}
+
+.md-nav {
+  font-size: 0.7rem;
+  line-height: 1.6;
 }
