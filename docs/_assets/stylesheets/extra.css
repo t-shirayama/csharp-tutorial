@@ -302,6 +302,10 @@ a.md-nav__link--active:hover {
   padding: 0.02rem 0.35rem;
   border-radius: 0.25rem;
   background: var(--site-footer-bg) !important;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 .md-footer__link:hover {
