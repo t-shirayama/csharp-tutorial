@@ -8,7 +8,7 @@
 
 ## 公開サイト
 
-https://t-shirayama.github.io/csharp-tutorial-lab/
+https://t-shirayama.github.io/csharp-tutorial/
 
 ## ローカル表示
 
